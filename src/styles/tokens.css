@@ -1,0 +1,94 @@
+:root {
+  /* ─── Brand Gradient Colors ─── */
+  --color-brand-lime: #b4f759;
+  --color-brand-green: #90ed6e;
+  --color-brand-teal: #35d5a4;
+  --color-brand-cyan: #00c7c5;
+  --color-brand-blue: #2d9be0;
+  --color-brand-indigo: #5277f7;
+
+  /* ─── Primary CTA / Button ─── */
+  --color-cta-bg: #3cb648;
+  --color-cta-hover: #2ea039;
+  --color-cta-text: #ffffff;
+
+  /* ─── Backgrounds ─── */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8f9fa;
+  --color-bg-card: #ffffff;
+  --color-bg-overlay: rgba(0, 0, 0, 0.5);
+  --color-bg-footer: #3cb648;
+  --color-bg-hero-gradient: linear-gradient(135deg, #b4f759 0%, #35d5a4 35%, #00c7c5 60%, #2d9be0 80%, #5277f7 100%);
+
+  /* ─── Text ─── */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #4a4a4a;
+  --color-text-muted: #707070;
+  --color-text-inverse: #ffffff;
+  --color-text-link: #3cb648;
+  --color-text-accent-green: #3cb648;
+  --color-text-heading: #222222;
+
+  /* ─── Borders ─── */
+  --color-border-default: #e5e7eb;
+  --color-border-strong: #707070;
+  --color-border-subtle: #f0f0f0;
+  --color-border-card: #e5e7eb;
+
+  /* ─── States ─── */
+  --color-state-hover: #f0fdf4;
+  --color-state-active: #dcfce7;
+  --color-state-disabled: #d1d5db;
+  --color-state-error: #ef4444;
+  --color-state-success: #22c55e;
+
+  /* ─── Metric Ring Colors ─── */
+  --color-ring-da: #ff6b6b;
+  --color-ring-dr: #ffd93d;
+  --color-ring-traffic: #6bcb77;
+  --color-ring-spam: #845ef7;
+
+  /* ─── Typography ─── */
+  --font-heading: var(--font-poppins), 'Poppins', sans-serif;
+  --font-body: var(--font-inter), 'Inter', sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+
+  /* ─── Border Radius ─── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+
+  /* ─── Shadows ─── */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-card: 0 3px 6px rgba(0, 0, 0, 0.10);
+
+  /* ─── Spacing ─── */
+  --space-section: 80px;
+  --space-section-sm: 48px;
+  --space-container: 24px;
+  --space-container-lg: 80px;
+}

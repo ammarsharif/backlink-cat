@@ -1,0 +1,110 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+@theme inline {
+  /* Backgrounds */
+  --color-bg-primary: var(--color-bg-primary);
+  --color-bg-secondary: var(--color-bg-secondary);
+  --color-bg-card: var(--color-bg-card);
+  --color-bg-footer: var(--color-bg-footer);
+
+  /* Brand */
+  --color-brand-lime: var(--color-brand-lime);
+  --color-brand-green: var(--color-brand-green);
+  --color-brand-teal: var(--color-brand-teal);
+  --color-brand-cyan: var(--color-brand-cyan);
+  --color-brand-blue: var(--color-brand-blue);
+  --color-brand-indigo: var(--color-brand-indigo);
+  --color-cta: var(--color-cta-bg);
+  --color-cta-hover: var(--color-cta-hover);
+
+  /* Text */
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-inverse: var(--color-text-inverse);
+  --color-text-link: var(--color-text-link);
+  --color-text-accent: var(--color-text-accent-green);
+  --color-text-heading: var(--color-text-heading);
+
+  /* Borders */
+  --color-border-default: var(--color-border-default);
+  --color-border-strong: var(--color-border-strong);
+  --color-border-subtle: var(--color-border-subtle);
+
+  /* Radius */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-full: var(--radius-full);
+
+  /* Shadows */
+  --shadow-card: var(--shadow-card);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+
+  /* Fonts */
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text-heading);
+}
+
+/* Hero gradient wave shape */
+.hero-wave {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+/* Green checkmark bullets */
+.check-list li {
+  position: relative;
+  padding-left: 1.75rem;
+}
+
+.check-list li::before {
+  content: '✔';
+  position: absolute;
+  left: 0;
+  color: var(--color-cta-bg);
+  font-size: 0.9rem;
+}
+
+/* Circular metric ring placeholder */
+.metric-ring {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border-width: 4px;
+  border-style: solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+}
