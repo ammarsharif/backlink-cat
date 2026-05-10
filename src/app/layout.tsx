@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Poppins, Inter } from 'next/font/google';
 import './globals.css';
 
@@ -22,7 +22,6 @@ export const metadata: Metadata = {
     'Buy & Sell Guest Posts at the Best Prices. Join BacklinkCAT, the leading marketplace connecting 100k+ bloggers and 7000+ clients. Monetize your blog with high recurring commissions.',
   keywords: ['backlinks', 'guest post', 'SEO', 'link building', 'publisher marketplace', 'content marketing'],
   authors: [{ name: 'BacklinkCAT Team' }],
-  viewport: 'width=device-width, initial-scale=1',
   robots: 'index, follow',
   openGraph: {
     title: 'BacklinkCAT - Best Backlink Marketplace',
@@ -32,6 +31,11 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 

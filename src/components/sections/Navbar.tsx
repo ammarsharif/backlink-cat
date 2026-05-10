@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { Menu, X, Search } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -11,13 +11,19 @@ import { Container } from "@/components/ui/Container";
 const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Category", href: "/category/all" },
-  { label: "Stories", href: "#" },
-  { label: "Blog", href: "#" },
-  { label: "Contact", href: "#" },
+  { label: "Stories", href: "/stories" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -33,14 +39,23 @@ export function Navbar() {
 
           {/* Desktop nav links and Auth */}
           <div className="hidden md:flex items-center gap-8">
-            <nav className="flex items-center gap-6">
+            <nav className="flex items-center gap-1">
               {NAV_LINKS.map((item) => (
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="text-[15px] font-medium text-gray-500 hover:text-[#6EBD44] transition-colors"
+                  className={cn(
+                    "relative text-[15px] font-medium px-3 py-1.5 rounded-md transition-all duration-200",
+                    isActive(item.href)
+                      ? "text-[#6EBD44] font-semibold"
+                      : "text-gray-500 hover:text-[#6EBD44] hover:bg-[#6EBD44]/5"
+                  )}
                 >
                   {item.label}
+                  {/* Active underline indicator */}
+                  {isActive(item.href) && (
+                    <span className="absolute bottom-[-4px] left-3 right-3 h-[2.5px] bg-[#6EBD44] rounded-full" />
+                  )}
                 </Link>
               ))}
             </nav>
@@ -73,12 +88,17 @@ export function Navbar() {
         )}
       >
         <Container>
-          <nav className="py-4 flex flex-col gap-3">
+          <nav className="py-4 flex flex-col gap-1">
             {NAV_LINKS.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className="text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-accent)] transition-colors"
+                className={cn(
+                  "text-sm font-medium px-3 py-2.5 rounded-lg transition-all",
+                  isActive(item.href)
+                    ? "text-[#6EBD44] bg-[#6EBD44]/8 font-semibold border-l-[3px] border-[#6EBD44] pl-4"
+                    : "text-gray-500 hover:text-[#6EBD44] hover:bg-gray-50"
+                )}
                 onClick={() => setMobileOpen(false)}
               >
                 {item.label}
