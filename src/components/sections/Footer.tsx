@@ -1,21 +1,21 @@
-import { Link2, Camera, Globe, Play, X } from 'lucide-react';
-import { Container } from '@/components/ui/Container';
+import { Link2, Camera, Globe, Play, X } from "lucide-react";
+import { Container } from "@/components/ui/Container";
 
 const USEFUL_LINKS = [
-  { label: 'Home', href: '#' },
-  { label: 'Category', href: '#' },
-  { label: 'Stories', href: '#' },
-  { label: 'Blog', href: '#' },
-  { label: 'Contact', href: '#' },
-  { label: 'Log In', href: '#' },
+  { label: "Home", href: "#" },
+  { label: "Category", href: "#" },
+  { label: "Stories", href: "#" },
+  { label: "Blog", href: "#" },
+  { label: "Contact", href: "#" },
+  { label: "Log In", href: "#" },
 ];
 
 const SOCIAL_LINKS = [
-  { label: 'Linkedin', href: '#', icon: Link2 },
-  { label: 'Instagram', href: '#', icon: Camera },
-  { label: 'Facebook', href: '#', icon: Globe },
-  { label: 'Youtube', href: '#', icon: Play },
-  { label: 'Twitter', href: '#', icon: X },
+  { label: "Linkedin", href: "#", icon: Link2 },
+  { label: "Instagram", href: "#", icon: Camera },
+  { label: "Facebook", href: "#", icon: Globe },
+  { label: "Youtube", href: "#", icon: Play },
+  { label: "Twitter", href: "#", icon: X },
 ];
 
 export function Footer() {
@@ -25,18 +25,23 @@ export function Footer() {
         <div className="py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* About */}
           <div>
-            <h4 className="font-bold text-white mb-3 text-sm uppercase tracking-wide">About US</h4>
+            <h4 className="font-bold text-white mb-3 text-sm uppercase tracking-wide">
+              About US
+            </h4>
             <p className="text-white/80 text-xs leading-relaxed">
-              {/* TODO: copy — about us paragraph */}
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-              industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-              scrambled it to make a type specimen book.
+              {/* TODO: copy - about us paragraph */}
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book.
             </p>
           </div>
 
           {/* Useful Links */}
           <div>
-            <h4 className="font-bold text-white mb-3 text-sm uppercase tracking-wide">Useful Links</h4>
+            <h4 className="font-bold text-white mb-3 text-sm uppercase tracking-wide">
+              Useful Links
+            </h4>
             <ul className="space-y-2">
               {USEFUL_LINKS.map((link) => (
                 <li key={link.label}>
@@ -53,7 +58,9 @@ export function Footer() {
 
           {/* Follow Us */}
           <div>
-            <h4 className="font-bold text-white mb-3 text-sm uppercase tracking-wide">Follow Us</h4>
+            <h4 className="font-bold text-white mb-3 text-sm uppercase tracking-wide">
+              Follow Us
+            </h4>
             <ul className="space-y-2.5">
               {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
                 <li key={label}>

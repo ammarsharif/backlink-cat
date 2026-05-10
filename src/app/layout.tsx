@@ -17,11 +17,23 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'BacklinkCAT — Backlink Marketplace',
+  title: 'BacklinkCAT - Best Backlink Marketplace for SEO Guest Posts',
   description:
-    'Buy & Sell Guest Posts at Best Prices. Join BacklinkCAT and monetize your blog with great recurring commissions. 100k+ bloggers, 7000+ clients.',
-  keywords: 'backlinks, guest post, SEO, link building, publisher marketplace',
+    'Buy & Sell Guest Posts at the Best Prices. Join BacklinkCAT, the leading marketplace connecting 100k+ bloggers and 7000+ clients. Monetize your blog with high recurring commissions.',
+  keywords: ['backlinks', 'guest post', 'SEO', 'link building', 'publisher marketplace', 'content marketing'],
+  authors: [{ name: 'BacklinkCAT Team' }],
+  viewport: 'width=device-width, initial-scale=1',
+  robots: 'index, follow',
+  openGraph: {
+    title: 'BacklinkCAT - Best Backlink Marketplace',
+    description: 'The premier marketplace for buying and selling guest posts.',
+    url: 'https://backlinkcat.com',
+    siteName: 'BacklinkCAT',
+    locale: 'en_US',
+    type: 'website',
+  },
 };
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

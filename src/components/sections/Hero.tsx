@@ -1,15 +1,15 @@
-import { Button } from '@/components/ui/Button';
-import { Container } from '@/components/ui/Container';
+import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/ui/Container";
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden min-h-[520px] md:min-h-[580px]">
-      {/* Gradient background — matches Figma green→teal→blue diagonal gradient */}
+      {/* Gradient background - matches Figma green→teal→blue diagonal gradient */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(135deg, #b4f759 0%, #6de89a 20%, #35d5a4 40%, #00c7c5 58%, #2d9be0 78%, #5277f7 100%)',
+            "linear-gradient(135deg, #b4f759 0%, #6de89a 20%, #35d5a4 40%, #00c7c5 58%, #2d9be0 78%, #5277f7 100%)",
         }}
       />
 
@@ -30,7 +30,7 @@ export function Hero() {
 
       <Container className="relative z-10 pt-12 pb-24 md:pt-16 md:pb-28">
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-0">
-          {/* Left — text content */}
+          {/* Left - text content */}
           <div className="flex-1 text-white max-w-xl">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-[var(--font-heading)] leading-tight mb-4 text-[var(--color-text-heading)]">
               Backlink Market Place
@@ -39,11 +39,14 @@ export function Hero() {
               Buy &amp; Sell Guest Post with us at Best Prices.
             </p>
             <p className="text-sm md:text-base text-gray-800 mb-6 max-w-sm">
-              {/* TODO: copy — replace with actual tagline from client */}
-              Join BACKLINKCAT and monetize your blog with great recurring commissions.
-              We have more than 100k bloggers and more than 7000 clients.
+              {/* TODO: copy - replace with actual tagline from client */}
+              Join BACKLINKCAT and monetize your blog with great recurring
+              commissions. We have more than 100k bloggers and more than 7000
+              clients.
             </p>
-            <p className="text-sm text-gray-700 mb-3">Just Sign Up and Subscribe for all updates!</p>
+            <p className="text-sm text-gray-700 mb-3">
+              Just Sign Up and Subscribe for all updates!
+            </p>
 
             {/* Email subscribe */}
             <div className="flex flex-col sm:flex-row gap-2 mb-5">
@@ -68,10 +71,10 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right — cat illustration */}
+          {/* Right - cat illustration */}
           <div className="flex-1 flex justify-center md:justify-end items-end relative">
             <div className="relative w-64 h-64 md:w-80 md:h-80">
-              {/* TODO: asset — place hero-cat.png in /public/images/ */}
+              {/* TODO: asset - place hero-cat.png in /public/images/ */}
               <img
                 src="/images/hero-cat.png"
                 alt="BacklinkCAT mascot"

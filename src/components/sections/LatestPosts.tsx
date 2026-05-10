@@ -1,30 +1,30 @@
-import { Container } from '@/components/ui/Container';
-import { Button } from '@/components/ui/Button';
+import { Container } from "@/components/ui/Container";
+import { Button } from "@/components/ui/Button";
 
 const POSTS = [
   {
-    id: '1',
-    image: '/images/post-1.jpg', // TODO: asset
-    title: 'What is Lorem Ipsum?',
+    id: "1",
+    image: "/images/post-1.jpg", // TODO: asset
+    title: "What is Lorem Ipsum?",
     excerpt:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.',
-    href: '#',
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.",
+    href: "#",
   },
   {
-    id: '2',
-    image: '/images/post-2.jpg', // TODO: asset
-    title: 'What is Lorem Ipsum?',
+    id: "2",
+    image: "/images/post-2.jpg", // TODO: asset
+    title: "What is Lorem Ipsum?",
     excerpt:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.',
-    href: '#',
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.",
+    href: "#",
   },
   {
-    id: '3',
-    image: '/images/post-3.jpg', // TODO: asset
-    title: 'What is Lorem Ipsum?',
+    id: "3",
+    image: "/images/post-3.jpg", // TODO: asset
+    title: "What is Lorem Ipsum?",
     excerpt:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.',
-    href: '#',
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.",
+    href: "#",
   },
 ];
 
@@ -44,7 +44,7 @@ export function LatestPosts() {
             >
               {/* Post image */}
               <div className="h-44 overflow-hidden bg-gray-200">
-                {/* TODO: asset — blog post thumbnail */}
+                {/* TODO: asset - blog post thumbnail */}
                 <img
                   src={post.image}
                   alt={post.title}

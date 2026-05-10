@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Menu, X, Search } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/Button';
-import { Container } from '@/components/ui/Container';
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Menu, X, Search } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/ui/Container";
 
 const NAV_LINKS = [
-  { label: 'Home', href: '#' },
-  { label: 'Category', href: '#' },
-  { label: 'Stories', href: '#' },
-  { label: 'Blog', href: '#' },
-  { label: 'Contact', href: '#' },
+  { label: "Home", href: "#" },
+  { label: "Category", href: "#" },
+  { label: "Stories", href: "#" },
+  { label: "Blog", href: "#" },
+  { label: "Contact", href: "#" },
 ];
 
 export function Navbar() {
@@ -21,7 +21,7 @@ export function Navbar() {
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
-      {/* Top bar — search filters */}
+      {/* Top bar - search filters */}
       <div className="hidden lg:block border-b border-[var(--color-border-subtle)] py-2">
         <Container>
           <form className="flex items-center gap-2">
@@ -30,7 +30,7 @@ export function Navbar() {
               placeholder="WEBSITE URL"
               className="flex-1 min-w-0 px-3 py-1.5 text-xs border border-[var(--color-border-default)] rounded-[var(--radius-sm)] focus:outline-none focus:ring-1 focus:ring-[var(--color-cta-bg)]"
             />
-            {['DA', 'DR', 'TRAFFIC', 'PRICE'].map((label) => (
+            {["DA", "DR", "TRAFFIC", "PRICE"].map((label) => (
               <input
                 key={label}
                 type="text"
@@ -54,12 +54,13 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            {/* TODO: asset — replace with actual logo */}
+            {/* TODO: asset - replace with actual logo */}
             <div className="w-8 h-8 bg-[var(--color-cta-bg)] rounded-full flex items-center justify-center">
               <span className="text-white text-xs font-bold">BC</span>
             </div>
             <span className="font-extrabold text-lg font-[var(--font-heading)]">
-              Backlink<span className="text-[var(--color-text-accent)]">CAT</span>
+              Backlink
+              <span className="text-[var(--color-text-accent)]">CAT</span>
             </span>
           </Link>
 
@@ -100,8 +101,8 @@ export function Navbar() {
       {/* Mobile menu */}
       <div
         className={cn(
-          'md:hidden border-t border-[var(--color-border-subtle)] bg-white overflow-hidden transition-all duration-300',
-          mobileOpen ? 'max-h-96' : 'max-h-0'
+          "md:hidden border-t border-[var(--color-border-subtle)] bg-white overflow-hidden transition-all duration-300",
+          mobileOpen ? "max-h-96" : "max-h-0",
         )}
       >
         <Container>
