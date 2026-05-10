@@ -1,6 +1,6 @@
-import { ChevronRight, Star } from 'lucide-react';
-import { Container } from '@/components/ui/Container';
-import { Button } from '@/components/ui/Button';
+import { ChevronRight, Star } from "lucide-react";
+import { Container } from "@/components/ui/Container";
+import { Button } from "@/components/ui/Button";
 
 interface MetricRingProps {
   value: number;
@@ -14,171 +14,227 @@ function MetricRing({ value, color, label }: MetricRingProps) {
   const filled = (value / 100) * circumference;
 
   return (
-    <div className="flex flex-col items-center gap-0.5">
-      <div className="relative w-11 h-11">
+    <div className="flex flex-col items-center">
+      <div className="relative w-[44px] h-[44px] flex items-center justify-center">
         <svg viewBox="0 0 44 44" className="w-full h-full -rotate-90">
-          <circle cx="22" cy="22" r={radius} fill="none" stroke="#e5e7eb" strokeWidth="4" />
+          <circle
+            cx="22"
+            cy="22"
+            r={radius}
+            fill="none"
+            stroke="#F3F3F3"
+            strokeWidth="2.5"
+          />
           <circle
             cx="22"
             cy="22"
             r={radius}
             fill="none"
             stroke={color}
-            strokeWidth="4"
+            strokeWidth="2.5"
             strokeDasharray={`${filled} ${circumference}`}
             strokeLinecap="round"
           />
         </svg>
-        <span className="absolute inset-0 flex items-center justify-center text-[9px] font-bold text-[var(--color-text-primary)]">
+        <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-black">
           {value}
         </span>
       </div>
-      <span className="text-[9px] text-[var(--color-text-muted)] font-medium">{label}</span>
     </div>
   );
 }
 
 const MOCK_WEBSITES = [
   {
-    id: 'site-1',
-    url: 'www.techinsight.com',
-    da: 52,
-    dr: 48,
-    traffic: 35,
-    spam: 2,
-    linkType: 'Do-Follow',
-    niche: 'Technology',
-    opPrice: 350,
-    listPrice: 90,
-    cryptoPrice: 250,
+    id: "site-1",
+    url: "www.website.com",
+    da: 70,
+    ss: 7,
+    dr: 70,
+    traffic: "50,000",
+    linkType: "DF",
+    niches: ["Tech", "Life Style", "Travelling", "Education", "Business"],
+    gpPrice: "$100",
+    liPrice: "$50",
+    cryptoPrice: "$250",
     reviews: 5,
   },
   {
-    id: 'site-2',
-    url: 'www.financenow.net',
-    da: 45,
-    dr: 42,
-    traffic: 28,
-    spam: 1,
-    linkType: 'Do-Follow',
-    niche: 'Finance',
-    opPrice: 420,
-    listPrice: 110,
-    cryptoPrice: 300,
+    id: "site-2",
+    url: "www.website.com",
+    da: 70,
+    ss: 7,
+    dr: 70,
+    traffic: "50,000",
+    linkType: "DF",
+    niches: ["Tech", "Life Style", "Travelling", "Education", "Business"],
+    gpPrice: "$100",
+    liPrice: "$50",
+    cryptoPrice: "$250",
     reviews: 5,
   },
   {
-    id: 'site-3',
-    url: 'www.healthylife.org',
-    da: 38,
-    dr: 35,
-    traffic: 42,
-    spam: 4,
-    linkType: 'Do-Follow',
-    niche: 'Health',
-    opPrice: 280,
-    listPrice: 75,
-    cryptoPrice: 200,
-    reviews: 4,
-  },
-  {
-    id: 'site-4',
-    url: 'www.travelbug.com',
-    da: 31,
-    dr: 29,
-    traffic: 50,
-    spam: 3,
-    linkType: 'Do-Follow',
-    niche: 'Travel',
-    opPrice: 150,
-    listPrice: 45,
-    cryptoPrice: 120,
+    id: "site-3",
+    url: "www.website.com",
+    da: 70,
+    ss: 7,
+    dr: 70,
+    traffic: "50,000",
+    linkType: "DF",
+    niches: ["Tech", "Life Style", "Travelling", "Education", "Business"],
+    gpPrice: "$100",
+    liPrice: "$50",
+    cryptoPrice: "$250",
     reviews: 5,
   },
   {
-    id: 'site-5',
-    url: 'www.businessdaily.com',
-    da: 62,
-    dr: 58,
-    traffic: 15,
-    spam: 1,
-    linkType: 'Do-Follow',
-    niche: 'Business',
-    opPrice: 550,
-    listPrice: 180,
-    cryptoPrice: 450,
+    id: "site-4",
+    url: "www.website.com",
+    da: 70,
+    ss: 7,
+    dr: 70,
+    traffic: "50,000",
+    linkType: "DF",
+    niches: ["Tech", "Life Style", "Travelling", "Education", "Business"],
+    gpPrice: "$100",
+    liPrice: "$50",
+    cryptoPrice: "$250",
     reviews: 5,
   },
 ];
 
-
 export function RecentWebsites() {
   return (
-    <section className="py-16 bg-[var(--color-bg-primary)]">
-      <Container>
-        <h2 className="text-2xl md:text-3xl font-bold font-[var(--font-heading)] text-center mb-10">
-          Recently <span className="text-[var(--color-text-accent)]">Added</span> Websites
+    <section className="py-20 bg-[#F9F9F9]">
+      <Container className="max-w-[1534px]">
+        <h2 className="text-[32px] md:text-[54px] font-bold text-center mb-16 font-[var(--font-heading)]">
+          <span className="text-[#7FC142]">Recently Added</span> Websites
         </h2>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-6">
           {MOCK_WEBSITES.map((site) => (
             <div
               key={site.id}
-              className="bg-white border border-[var(--color-border-card)] rounded-[var(--radius-lg)] shadow-[var(--shadow-sm)] p-4 flex flex-col sm:flex-row items-start sm:items-center gap-4"
+              className="bg-white border border-[#D9D9D9] shadow-sm flex flex-col xl:flex-row overflow-hidden"
             >
-              {/* URL */}
-              <div className="sm:w-40 shrink-0">
-                <p className="text-xs text-[var(--color-text-muted)] mb-1">Website URL:</p>
-                <p className="text-xs font-semibold text-[var(--color-text-primary)] truncate">{site.url}</p>
-              </div>
-
-              {/* Metrics */}
-              <div className="flex items-end gap-3 flex-wrap">
-                <MetricRing value={site.da} color="#ef4444" label="MOZ DA" />
-                <MetricRing value={site.dr} color="#f59e0b" label="MOZ DR" />
-                <MetricRing value={site.traffic} color="#22c55e" label="Alexa Traffic" />
-                <MetricRing value={site.spam} color="#8b5cf6" label="Spam Score" />
-              </div>
-
-              {/* Link info */}
-              <div className="hidden md:flex flex-col gap-1 sm:w-32 shrink-0">
-                <div>
-                  <p className="text-[9px] text-[var(--color-text-muted)]">Link Type</p>
-                  <p className="text-xs font-medium text-[var(--color-text-primary)]">{site.linkType}</p>
+              {/* Left Side: URL and Data Table */}
+              <div className="flex-1 p-4 md:p-6">
+                {/* URL Header */}
+                <div className="mb-4 flex items-center gap-2">
+                  <span className="text-[20px] font-bold text-black leading-none">
+                    Website URL:
+                  </span>
+                  <span className="text-[20px] text-[#444444] leading-none">
+                    {site.url}
+                  </span>
                 </div>
-                <div>
-                  <p className="text-[9px] text-[var(--color-text-muted)]">Niche</p>
-                  <p className="text-xs font-medium text-[var(--color-text-primary)] line-clamp-1">{site.niche}</p>
-                </div>
-              </div>
 
-              {/* Prices */}
-              <div className="hidden lg:flex items-center gap-4 shrink-0">
-                {[
-                  { label: 'OP Price', value: site.opPrice },
-                  { label: 'L.Price', value: site.listPrice },
-                  { label: 'CRD/Crypto', value: site.cryptoPrice },
-                ].map(({ label, value }) => (
-                  <div key={label} className="text-center">
-                    <p className="text-[9px] text-[var(--color-text-muted)]">{label}</p>
-                    <p className="text-xs font-bold text-[var(--color-text-primary)]">${value}</p>
+                {/* Data Table */}
+                <div className="overflow-x-auto">
+                  <div className="min-w-[957px] border border-[#E0E0E0] rounded-sm overflow-hidden">
+                    {/* Table Header */}
+                    <div className="grid grid-cols-[repeat(9,1fr)] bg-[#E8F5E9] border-b border-[#E0E0E0]">
+                      {[
+                        "MOZ DA",
+                        "MOZ SS",
+                        "Ahref DR",
+                        "Ahref Traffic",
+                        "Link Type",
+                        "Niche",
+                        "GP Price",
+                        "LI Price",
+                        "CBD/Crypto",
+                      ].map((header) => (
+                        <div
+                          key={header}
+                          className="py-1.5 px-1 text-center text-[11px] font-bold text-black border-r border-[#E0E0E0] last:border-r-0"
+                        >
+                          {header}
+                        </div>
+                      ))}
+                    </div>
+                    {/* Table Body */}
+                    <div className="grid grid-cols-[repeat(9,1fr)] bg-[#FDFDFD] items-stretch min-h-[65px]">
+                      {/* MOZ DA */}
+                      <div className="py-2 flex justify-center border-r border-[#E0E0E0]">
+                        <MetricRing value={site.da} color="#FF0000" label="" />
+                      </div>
+                      {/* MOZ SS */}
+                      <div className="py-2 flex justify-center border-r border-[#E0E0E0]">
+                        <MetricRing value={site.ss} color="#00FF00" label="" />
+                      </div>
+                      {/* Ahref DR */}
+                      <div className="py-2 flex justify-center border-r border-[#E0E0E0]">
+                        <MetricRing value={site.dr} color="#FF00FF" label="" />
+                      </div>
+                      {/* Ahref Traffic */}
+                      <div className="flex items-center justify-center text-[12px] font-medium text-black border-r border-[#E0E0E0]">
+                        {site.traffic}
+                      </div>
+                      {/* Link Type */}
+                      <div className="flex items-center justify-center text-[12px] font-medium text-black border-r border-[#E0E0E0]">
+                        {site.linkType}
+                      </div>
+                      {/* Niche */}
+                      <div className="py-1.5 px-2 flex flex-col gap-0.5 border-r border-[#E0E0E0]">
+                        {site.niches.map((niche) => (
+                          <div key={niche} className="flex items-center gap-1">
+                            <svg
+                              className="w-2.5 h-2.5 text-[#7FC142] shrink-0"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={3}
+                                d="M5 13l4 4L19 7"
+                              />
+                            </svg>
+                            <span className="text-[9px] font-medium leading-none text-[#444444]">
+                              {niche}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                      {/* GP Price */}
+                      <div className="flex items-center justify-center text-[12px] font-medium text-black border-r border-[#E0E0E0]">
+                        {site.gpPrice}
+                      </div>
+                      {/* LI Price */}
+                      <div className="flex items-center justify-center text-[12px] font-medium text-black border-r border-[#E0E0E0]">
+                        {site.liPrice}
+                      </div>
+                      {/* CBD/Crypto */}
+                      <div className="flex items-center justify-center text-[12px] font-medium text-black">
+                        {site.cryptoPrice}
+                      </div>
+                    </div>
                   </div>
-                ))}
+                </div>
               </div>
 
-              {/* Reviews + CTA */}
-              <div className="flex items-center gap-3 sm:ml-auto shrink-0">
-                <div className="flex flex-col items-center">
-                  <div className="flex gap-0.5">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} size={10} className="text-yellow-400 fill-yellow-400" />
-                    ))}
+              {/* Right Sidebar */}
+              <div className="w-full xl:w-[280px] bg-white border-t xl:border-t-0 xl:border-l border-[#E0E0E0] p-4 flex flex-col justify-center gap-4">
+                <div className="flex items-center justify-center gap-6">
+                  <div className="flex items-center gap-2">
+                    <svg
+                      className="w-5 h-5 text-black"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    </svg>
+                    <span className="text-[20px] font-medium text-black">
+                      {site.reviews} Reviews
+                    </span>
                   </div>
-                  <span className="text-[9px] text-[var(--color-text-muted)] mt-0.5">{site.reviews} Reviews</span>
                 </div>
-                <Button variant="primary" size="sm" className="flex items-center gap-1 text-xs px-4 py-2">
-                  BUY NOW
-                  <ChevronRight size={14} />
+
+                <Button className="w-full h-[54px] bg-[#7FC142] hover:bg-[#6EBD44] text-white text-[20px] font-bold rounded-[8px] flex items-center justify-between px-6 transition-all">
+                  <span>BUY NOW</span>
+                  <ChevronRight className="w-6 h-6" />
                 </Button>
               </div>
             </div>
