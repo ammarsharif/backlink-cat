@@ -6,7 +6,6 @@ import { ChevronLeft, ChevronRight, Heart, Monitor, Plane, Briefcase, Graduation
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { Container } from '@/components/ui/Container';
-import { SectionTitle } from '@/components/ui/SectionTitle';
 
 const CATEGORIES = [
   { id: 'health', label: 'Health', icon: '/images/health.svg' },
