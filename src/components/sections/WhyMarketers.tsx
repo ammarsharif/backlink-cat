@@ -1,4 +1,3 @@
-import { Play } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 
 const MARKETER_FEATURES = [
@@ -13,53 +12,35 @@ const MARKETER_FEATURES = [
 
 export function WhyMarketers() {
   return (
-    <section className="py-16 bg-[var(--color-bg-secondary)]">
-      <Container>
-        <h2 className="text-2xl md:text-3xl font-bold font-[var(--font-heading)] text-center mb-12">
-          Why <span className="text-[var(--color-text-accent)]">Marketers</span>{" "}
-          Choose Us?
+    <section className="py-20 bg-white overflow-hidden">
+      <Container className="max-w-[1440px]">
+        <h2 className="text-[32px] md:text-[40px] lg:text-[48px] font-bold text-center mb-12 font-[var(--font-heading)] leading-tight">
+          <span className="text-[#7FC142]">Why Marketers</span> Choose Us?
         </h2>
 
-        <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
-          {/* Video placeholder - left side */}
-          <div className="flex-1 w-full max-w-lg order-2 md:order-1">
-            <div className="relative rounded-[var(--radius-xl)] overflow-hidden bg-gray-900 aspect-video flex items-center justify-center shadow-[var(--shadow-lg)]">
-              {/* TODO: asset - place marketers-video-thumbnail.jpg in /public/images/ */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-10 lg:gap-12">
+          {/* Video Image - Left side */}
+          <div className="lg:col-span-7 w-full order-1">
+            <div className="relative rounded-[20px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-transform hover:scale-[1.01] duration-500">
               <img
-                src="/images/marketers-video-thumb.jpg"
+                src="/images/publisher-video-image.svg"
                 alt="Why Marketers Choose Us video"
-                className="absolute inset-0 w-full h-full object-cover opacity-70"
+                className="w-full h-auto object-cover min-h-[250px] lg:min-h-[420px]"
               />
-              <button
-                className="relative z-10 w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform"
-                aria-label="Play video"
-              >
-                <Play
-                  size={22}
-                  className="text-[var(--color-cta-bg)] ml-1"
-                  fill="currentColor"
-                />
-              </button>
             </div>
           </div>
 
-          {/* Feature list - right side */}
-          <div className="flex-1 order-1 md:order-2">
-            <ul className="space-y-4">
+          {/* Feature list - Right side */}
+          <div className="lg:col-span-5 w-full order-2">
+            <ul className="space-y-3">
               {MARKETER_FEATURES.map((feature) => (
-                <li key={feature} className="flex items-center gap-3">
-                  <span className="w-5 h-5 rounded-full bg-[var(--color-cta-bg)] flex items-center justify-center shrink-0">
-                    <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
-                      <path
-                        d="M10 3L5 8.5 2 5.5"
-                        stroke="white"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </span>
-                  <span className="text-[var(--color-text-secondary)] text-sm md:text-base">
+                <li key={feature} className="flex items-start gap-4">
+                  <img 
+                    src="/images/hand-point-right.svg" 
+                    alt="icon" 
+                    className="w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 mt-1 lg:mt-1.5 shrink-0" 
+                  />
+                  <span className="text-[16px] md:text-[20px] lg:text-[24px] lg:leading-[40px] text-black font-normal">
                     {feature}
                   </span>
                 </li>

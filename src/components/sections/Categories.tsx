@@ -83,8 +83,8 @@ export function Categories() {
                   key={`${item.id}-${idx}`}
                   onClick={() => setActive(item.id)}
                   className={cn(
-                    'flex flex-col items-center justify-center gap-4 w-[280px] h-[202px] rounded-[15px] transition-all duration-300 shadow-md shrink-0 bg-white hover:shadow-lg',
-                    active === item.id ? 'shadow-lg border border-[#6EBD44]/50' : 'border border-transparent'
+                    'flex flex-col items-center justify-center gap-4 w-[280px] h-[202px] rounded-[15px] transition-all duration-300 shrink-0 bg-white/80 backdrop-blur-sm border-[1px] border-[#C3B6B6] shadow-[0px_7px_14px_rgba(0,0,0,0.16)] hover:shadow-lg',
+                    active === item.id ? 'border-[#6EBD44] ring-1 ring-[#6EBD44]/20' : ''
                   )}
                 >
                   <div className="w-[60px] h-[60px] flex items-center justify-center mb-1">
