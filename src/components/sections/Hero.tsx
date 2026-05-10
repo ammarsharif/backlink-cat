@@ -28,7 +28,7 @@ export function Hero() {
             </div>
           ))}
           <div className="px-2 pl-4 shrink-0">
-            <button className="bg-[#6EBD44] text-white px-8 xl:px-10 h-[45px] rounded-full text-[15px] font-bold hover:bg-[#5da539] transition-colors flex items-center justify-center gap-2">
+            <button className="bg-[#6EBD44] text-white cursor-pointer px-8 xl:px-10 h-[45px] rounded-full text-[15px] font-bold hover:bg-[#5da539] transition-colors flex items-center justify-center gap-2">
               LET'S GO <Search size={18} />
             </button>
           </div>
