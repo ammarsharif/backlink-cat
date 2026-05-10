@@ -9,8 +9,8 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 
 const NAV_LINKS = [
-  { label: "Home", href: "#" },
-  { label: "Category", href: "#" },
+  { label: "Home", href: "/" },
+  { label: "Category", href: "/category/all" },
   { label: "Stories", href: "#" },
   { label: "Blog", href: "#" },
   { label: "Contact", href: "#" },

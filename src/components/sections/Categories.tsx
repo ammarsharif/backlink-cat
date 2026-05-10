@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Heart, Monitor, Plane, Briefcase, GraduationCap } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 import { Container } from '@/components/ui/Container';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 
@@ -79,8 +80,9 @@ export function Categories() {
               onAnimationComplete={onAnimationComplete}
             >
               {tripledItems.map((item, idx) => (
-                <button
+                <Link
                   key={`${item.id}-${idx}`}
+                  href={`/category/${item.id}`}
                   onClick={() => setActive(item.id)}
                   className={cn(
                     'flex flex-col items-center justify-center gap-4 w-[280px] h-[202px] rounded-[15px] transition-all duration-300 shrink-0 bg-white/80 backdrop-blur-sm border-[1px] border-[#C3B6B6] shadow-[0px_7px_14px_rgba(0,0,0,0.16)] hover:shadow-lg',
@@ -91,7 +93,7 @@ export function Categories() {
                     <img src={item.icon} alt={item.label} className="w-full h-full object-contain" />
                   </div>
                   <span className="text-[18px] md:text-[20px] font-medium text-[#000000]">{item.label}</span>
-                </button>
+                </Link>
               ))}
             </motion.div>
           </div>
