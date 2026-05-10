@@ -16,7 +16,7 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
       if (user && pathname === "/login") {
         router.push("/");
       } else if (!user && pathname !== "/login") {
-        // Handled in render
+        router.push("/login");
       } else {
         setShowChildren(true);
       }
@@ -32,23 +32,7 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   }
 
   if (!user && pathname !== "/login") {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#FAFAFA] font-[var(--font-poppins)] p-4 text-center">
-         <div className="w-24 h-24 mb-6 drop-shadow-md">
-            <img src="/images/backlink-cat-logo.svg" alt="BacklinkCAT" className="w-full h-full object-contain" />
-         </div>
-         <h2 className="text-3xl font-bold text-[#333] mb-3">Authentication Required</h2>
-         <p className="text-gray-500 max-w-md mx-auto mb-8 text-[15px] leading-relaxed">
-           Welcome to the BacklinkCAT platform. To ensure a secure and professional environment, please log in to access the marketplace.
-         </p>
-         <button 
-           onClick={() => router.push("/login")} 
-           className="bg-[#6EBD44] hover:bg-[#5da539] text-white px-10 cursor-pointer py-3.5 rounded-full font-bold transition-colors shadow-lg shadow-[#6EBD44]/20 flex items-center gap-2"
-         >
-           Proceed to Login
-         </button>
-      </div>
-    );
+    return null; // Don't render anything while redirecting
   }
 
   // Prevent flash of content
