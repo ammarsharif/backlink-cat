@@ -31,6 +31,10 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  icons: {
+    icon: '/images/backlink-cat-logo.svg',
+    apple: '/images/backlink-cat-logo.svg',
+  },
 };
 
 export const viewport: Viewport = {
