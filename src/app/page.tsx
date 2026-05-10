@@ -14,8 +14,21 @@ export default function Home() {
     <>
       <Navbar />
       <main>
-        <Hero />
-        <Categories />
+        <div className="relative overflow-hidden w-full min-h-[1400px] flex flex-col">
+          {/* Main Background Image spanning Hero and Categories */}
+          <div className="absolute top-0 left-0 w-full h-[1400px] pointer-events-none z-0">
+            <img 
+              src="/images/bg-colored-image.svg" 
+              alt="" 
+              className="w-full h-full object-cover object-top"
+            />
+          </div>
+          <div className="relative z-10 flex flex-col flex-1">
+            <Hero />
+            <div className="mt-16" />
+            <Categories />
+          </div>
+        </div>
         <WhyPublishers />
         <WhyMarketers />
         <RecentWebsites />

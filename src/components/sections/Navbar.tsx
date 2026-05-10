@@ -21,70 +21,37 @@ export function Navbar() {
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
-      {/* Top bar - search filters */}
-      <div className="hidden lg:block border-b border-[var(--color-border-subtle)] py-2">
-        <Container>
-          <form className="flex items-center gap-2">
-            <input
-              type="text"
-              placeholder="WEBSITE URL"
-              className="flex-1 min-w-0 px-3 py-1.5 text-xs border border-[var(--color-border-default)] rounded-[var(--radius-sm)] focus:outline-none focus:ring-1 focus:ring-[var(--color-cta-bg)]"
-            />
-            {["DA", "DR", "TRAFFIC", "PRICE"].map((label) => (
-              <input
-                key={label}
-                type="text"
-                placeholder={label}
-                className="w-20 px-3 py-1.5 text-xs border border-[var(--color-border-default)] rounded-[var(--radius-sm)] focus:outline-none focus:ring-1 focus:ring-[var(--color-cta-bg)]"
-              />
-            ))}
-            <button
-              type="submit"
-              className="bg-[var(--color-cta-bg)] text-white px-4 py-1.5 rounded-[var(--radius-sm)] text-xs font-semibold hover:bg-[var(--color-cta-hover)] transition-colors flex items-center gap-1"
-            >
-              <Search size={12} />
-              GET IT
-            </button>
-          </form>
-        </Container>
-      </div>
+
 
       {/* Main nav */}
-      <Container>
+      <Container size="wide">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            {/* TODO: asset - replace with actual logo */}
-            <div className="w-8 h-8 bg-[var(--color-cta-bg)] rounded-full flex items-center justify-center">
-              <span className="text-white text-xs font-bold">BC</span>
-            </div>
-            <span className="font-extrabold text-lg font-[var(--font-heading)]">
-              Backlink
-              <span className="text-[var(--color-text-accent)]">CAT</span>
-            </span>
+            <img src="/images/backlink-main-logo.svg" alt="BacklinkCAT" className="h-[40px] w-auto" />
           </Link>
 
-          {/* Desktop nav links */}
-          <nav className="hidden md:flex items-center gap-6">
-            {NAV_LINKS.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-accent)] transition-colors"
-              >
-                {item.label}
+          {/* Desktop nav links and Auth */}
+          <div className="hidden md:flex items-center gap-8">
+            <nav className="flex items-center gap-6">
+              {NAV_LINKS.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="text-[15px] font-medium text-gray-500 hover:text-[#6EBD44] transition-colors"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+            <div className="flex items-center gap-4">
+              <Link href="#" className="text-[15px] font-medium text-gray-500 hover:text-[#6EBD44] transition-colors">
+                Login
               </Link>
-            ))}
-          </nav>
-
-          {/* Auth buttons */}
-          <div className="hidden md:flex items-center gap-2">
-            <Button variant="ghost" size="sm">
-              Login
-            </Button>
-            <Button variant="primary" size="sm">
-              SIGN UP
-            </Button>
+              <button className="bg-[#6EBD44] text-white px-6 py-2 text-[14px] font-bold tracking-wide rounded-[4px] hover:bg-[#5da539] transition-colors">
+                SIGN UP
+              </button>
+            </div>
           </div>
 
           {/* Mobile hamburger */}
