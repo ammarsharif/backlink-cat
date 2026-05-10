@@ -25,7 +25,7 @@ function ErrorState({ onRetry, message }: { onRetry: () => void; message: string
       </div>
       <button
         onClick={onRetry}
-        className="flex items-center gap-2 px-6 py-2.5 bg-[#7FC142] text-white text-[14px] font-bold rounded-[4px] hover:bg-[#6EBD44] transition-colors"
+        className="flex items-center gap-2 px-6 py-2.5 bg-[#7FC142] text-white text-[14px] font-bold rounded-[4px] hover:bg-[#6EBD44] transition-colors cursor-pointer"
       >
         <RefreshCw className="w-4 h-4" />
         Try Again
@@ -94,7 +94,7 @@ function PaginationControls({ currentPage, totalPages, onPageChange }: Paginatio
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="w-[44px] h-[44px] rounded-full border border-[#E0E0E0] flex items-center justify-center text-[#444444] hover:border-[#7FC142] hover:text-[#7FC142] transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+          className="w-[44px] h-[44px] rounded-full border border-[#E0E0E0] flex items-center justify-center text-[#444444] hover:border-[#7FC142] hover:text-[#7FC142] transition-all disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
@@ -108,7 +108,7 @@ function PaginationControls({ currentPage, totalPages, onPageChange }: Paginatio
             <button
               key={page}
               onClick={() => onPageChange(page as number)}
-              className={`w-[44px] h-[44px] rounded-full border flex items-center justify-center text-[16px] transition-all ${
+              className={`w-[44px] h-[44px] rounded-full border flex items-center justify-center text-[16px] transition-all cursor-pointer ${
                 page === currentPage
                   ? 'border-[#7FC142] text-[#7FC142] font-bold bg-[#F0F7E8]'
                   : 'border-[#E0E0E0] text-[#444444] hover:border-[#7FC142] hover:text-[#7FC142]'
@@ -122,7 +122,7 @@ function PaginationControls({ currentPage, totalPages, onPageChange }: Paginatio
         <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="w-[44px] h-[44px] rounded-full border border-[#E0E0E0] flex items-center justify-center text-[#444444] hover:border-[#7FC142] hover:text-[#7FC142] transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+          className="w-[44px] h-[44px] rounded-full border border-[#E0E0E0] flex items-center justify-center text-[#444444] hover:border-[#7FC142] hover:text-[#7FC142] transition-all disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
         >
           <ChevronRight className="w-5 h-5" />
         </button>

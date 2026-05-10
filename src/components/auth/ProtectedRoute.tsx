@@ -43,7 +43,7 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
          </p>
          <button 
            onClick={() => router.push("/login")} 
-           className="bg-[#6EBD44] hover:bg-[#5da539] text-white px-10 py-3.5 rounded-full font-bold transition-colors shadow-lg shadow-[#6EBD44]/20 flex items-center gap-2"
+           className="bg-[#6EBD44] hover:bg-[#5da539] text-white px-10 cursor-pointer py-3.5 rounded-full font-bold transition-colors shadow-lg shadow-[#6EBD44]/20 flex items-center gap-2"
          >
            Proceed to Login
          </button>

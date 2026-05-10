@@ -17,7 +17,7 @@ export function BlogPagination({ totalPages = 50 }: { totalPages?: number }) {
           onClick={() => setActivePage(page)}
           aria-current={activePage === page ? "page" : undefined}
           className={cn(
-            "w-[42px] h-[42px] rounded-full border text-[16px] font-medium transition-all hover:border-[#6EBD44] hover:text-[#6EBD44]",
+            "w-[42px] h-[42px] rounded-full border text-[16px] font-medium transition-all hover:border-[#6EBD44] hover:text-[#6EBD44] cursor-pointer",
             activePage === page
               ? "border-[#6EBD44] text-[#6EBD44] bg-white shadow-sm font-semibold"
               : "border-[#DCDCDC] text-[#555] bg-white"
@@ -31,7 +31,7 @@ export function BlogPagination({ totalPages = 50 }: { totalPages?: number }) {
       <button
         onClick={() => setActivePage((p) => Math.min(p + 1, totalPages))}
         aria-label="Next page"
-        className="w-[42px] h-[42px] rounded-full border border-[#DCDCDC] bg-white flex items-center justify-center text-[#555] hover:border-[#6EBD44] hover:text-[#6EBD44] transition-all"
+        className="w-[42px] h-[42px] rounded-full border border-[#DCDCDC] bg-white flex items-center justify-center text-[#555] hover:border-[#6EBD44] hover:text-[#6EBD44] transition-all cursor-pointer"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M9 18l6-6-6-6" />
@@ -42,7 +42,7 @@ export function BlogPagination({ totalPages = 50 }: { totalPages?: number }) {
       <button
         onClick={() => setActivePage(totalPages)}
         className={cn(
-          "w-[42px] h-[42px] rounded-full border text-[16px] font-medium transition-all hover:border-[#6EBD44] hover:text-[#6EBD44]",
+          "w-[42px] h-[42px] rounded-full border text-[16px] font-medium transition-all hover:border-[#6EBD44] hover:text-[#6EBD44] cursor-pointer",
           activePage === totalPages
             ? "border-[#6EBD44] text-[#6EBD44] bg-white shadow-sm font-semibold"
             : "border-[#DCDCDC] text-[#555] bg-white"

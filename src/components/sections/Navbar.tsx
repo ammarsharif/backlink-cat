@@ -79,7 +79,7 @@ export function Navbar() {
                   <Link href="/login" className="text-[15px] font-medium text-gray-500 hover:text-[#6EBD44] transition-colors">
                     Login
                   </Link>
-                  <button className="bg-[#6EBD44] text-white px-6 py-2 text-[14px] font-bold tracking-wide rounded-[4px] hover:bg-[#5da539] transition-colors">
+                  <button className="bg-[#6EBD44] text-white px-6 py-2 text-[14px] font-bold tracking-wide rounded-[4px] hover:bg-[#5da539] transition-colors cursor-pointer">
                     SIGN UP
                   </button>
                 </>
@@ -89,7 +89,7 @@ export function Navbar() {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden p-2 text-[var(--color-text-secondary)]"
+            className="md:hidden p-2 text-[var(--color-text-secondary)] cursor-pointer"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle menu"
           >
@@ -139,7 +139,7 @@ export function Navbar() {
                       Login
                     </Button>
                   </Link>
-                  <Button variant="primary" size="sm" className="flex-1">
+                  <Button variant="primary" size="sm" className="flex-1 cursor-pointer">
                     SIGN UP
                   </Button>
                 </div>

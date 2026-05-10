@@ -29,7 +29,7 @@ export function BlogSidebar() {
               className="w-full h-[54px] border border-[#CCCCCC] rounded-[4px] pl-10 pr-4 text-[14px] focus:outline-none focus:border-[#6EBD44] transition bg-white"
             />
           </div>
-          <button className="w-full h-[54px] bg-[#6EBD44] text-white font-bold rounded-[4px] hover:bg-[#5da539] active:scale-[0.98] transition-all font-[var(--font-poppins)] text-[15px] tracking-widest shadow-sm hover:shadow-md">
+          <button className="w-full h-[54px] bg-[#6EBD44] text-white font-bold rounded-[4px] hover:bg-[#5da539] active:scale-[0.98] transition-all font-[var(--font-poppins)] text-[15px] tracking-widest shadow-sm hover:shadow-md cursor-pointer">
             SEARCH
           </button>
         </div>
@@ -52,7 +52,7 @@ export function BlogSidebar() {
             onChange={(e) => setEmail(e.target.value)}
             className="w-full h-[54px] border border-[#CCCCCC] rounded-[4px] px-4 text-[14px] focus:outline-none focus:border-[#6EBD44] transition bg-white text-center"
           />
-          <button className="w-full h-[54px] bg-[#6EBD44] text-white font-bold rounded-[4px] hover:bg-[#5da539] active:scale-[0.98] transition-all font-[var(--font-poppins)] text-[15px] tracking-widest shadow-sm hover:shadow-md">
+          <button className="w-full h-[54px] bg-[#6EBD44] text-white font-bold rounded-[4px] hover:bg-[#5da539] active:scale-[0.98] transition-all font-[var(--font-poppins)] text-[15px] tracking-widest shadow-sm hover:shadow-md cursor-pointer">
             SUBSCRIBE
           </button>
         </div>

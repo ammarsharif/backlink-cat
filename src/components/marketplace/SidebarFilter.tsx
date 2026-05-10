@@ -118,15 +118,15 @@ function FilterSelect({ label, placeholder, options, value, onChange }: FilterSe
           </span>
           <div className="flex items-center gap-1 shrink-0">
             {value && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onChange(null);
-                }}
-                className="p-0.5 hover:text-red-500 transition-colors"
-              >
-                <X className="w-3.5 h-3.5" />
-              </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onChange(null);
+                  }}
+                  className="p-0.5 hover:text-red-500 transition-colors cursor-pointer"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
             )}
             <ChevronDown
               className={`w-5 h-5 transition-transform duration-200 ${
@@ -200,7 +200,7 @@ function NicheSelect({ value, onChange }: NicheSelectProps) {
                   e.stopPropagation();
                   onChange(null);
                 }}
-                className="p-0.5 hover:text-red-500 transition-colors"
+                className="p-0.5 hover:text-red-500 transition-colors cursor-pointer"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -256,7 +256,7 @@ function ActiveFiltersBar({
       </span>
       <button
         onClick={onReset}
-        className="text-[12px] text-[#888] hover:text-red-500 flex items-center gap-1 transition-colors"
+        className="text-[12px] text-[#888] hover:text-red-500 flex items-center gap-1 transition-colors cursor-pointer"
       >
         <X className="w-3.5 h-3.5" />
         Reset all
@@ -343,7 +343,7 @@ export function SidebarFilter({ onFiltersChange }: SidebarFilterProps) {
               {domainSearch && (
                 <button
                   onClick={() => setDomainSearch('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#A0A0A0] hover:text-red-500 transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#A0A0A0] hover:text-red-500 transition-colors cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>

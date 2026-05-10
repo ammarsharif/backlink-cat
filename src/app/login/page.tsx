@@ -68,7 +68,7 @@ export default function LoginPage() {
           <button
             onClick={handleAnonymousLogin}
             disabled={loading}
-            className="w-full bg-[#75C246] hover:bg-[#62aa37] text-white h-12 rounded-lg text-[15px] font-bold transition-colors disabled:opacity-70 flex items-center justify-center gap-2"
+            className="w-full bg-[#75C246] hover:bg-[#62aa37] text-white h-12 rounded-lg text-[15px] font-bold transition-colors disabled:opacity-70 flex items-center justify-center gap-2 cursor-pointer"
           >
             {loading ? <Loader2 className="animate-spin" size={20} /> : null}
             {loading ? "Logging in..." : "Login to Continue"}

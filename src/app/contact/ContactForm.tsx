@@ -118,7 +118,7 @@ export function ContactForm() {
         <button 
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-[#6EBD44] text-white h-[60px] md:h-[70px] rounded-[5px] text-[18px] md:text-[20px] font-bold mt-4 hover:bg-[#5da539] transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+          className="w-full bg-[#6EBD44] text-white h-[60px] md:h-[70px] rounded-[5px] text-[18px] md:text-[20px] font-bold mt-4 hover:bg-[#5da539] transition-colors disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
         >
           {isSubmitting ? 'Sending...' : 'Send Message'}
         </button>

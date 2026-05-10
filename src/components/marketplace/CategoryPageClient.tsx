@@ -24,21 +24,43 @@ export function CategoryPageClient({ slug }: CategoryPageClientProps) {
     setFilters(newFilters);
   }, []);
 
-  const categoryName = slug === 'all' ? 'All' : decodeURIComponent(slug).replace(/-/g, ' ');
-  const formattedName = categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
+  const safeSlug = slug && slug !== 'undefined' ? slug : 'all';
+  const categoryName =
+    safeSlug === 'all'
+      ? 'Marketplace'
+      : decodeURIComponent(safeSlug).replace(/-/g, ' ');
+  const formattedName =
+    categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
 
   return (
     <>
       {/* Header */}
       <div className="mb-12">
         <h1 className="text-[54px] font-bold font-[var(--font-heading)] mb-6">
-          <span className="text-[#7FC142]">Category</span> {formattedName}
+          {safeSlug === 'all' ? (
+            <>
+              Linkbuilding <span className="text-[#7FC142]">Marketplace</span>
+            </>
+          ) : (
+            <>
+              <span className="text-[#7FC142]">Category</span> {formattedName}
+            </>
+          )}
         </h1>
         <p className="text-[20px] text-[#444444] leading-relaxed max-w-[1100px]">
-          Browse premium websites in the{' '}
-          <strong className="text-[#7FC142]">{formattedName}</strong> category and find
-          the perfect backlink opportunity. Filter by metrics, price, and niche to find
-          the exact match for your SEO strategy.
+          {safeSlug === 'all' ? (
+            <>
+              Browse through our extensive list of high-quality websites. Filter by metrics, 
+              price, and niche to find the perfect backlink opportunities for your SEO strategy.
+            </>
+          ) : (
+            <>
+              Browse premium websites in the{' '}
+              <strong className="text-[#7FC142]">{formattedName}</strong> category and find
+              the perfect backlink opportunity. Filter by metrics, price, and niche to find
+              the exact match for your SEO strategy.
+            </>
+          )}
         </p>
       </div>
 

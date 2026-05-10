@@ -56,7 +56,7 @@ export function Hero() {
               </div>
             ))}
           </div>
-          <button className="w-full bg-[#6EBD44] text-white h-12 rounded-lg text-[15px] font-bold mt-2">
+          <button className="w-full bg-[#6EBD44] text-white h-12 rounded-lg text-[15px] font-bold mt-2 cursor-pointer">
             LET'S GO
           </button>
         </div>
@@ -86,17 +86,17 @@ export function Hero() {
                 placeholder="Enter your email!"
                 className="flex-1 px-6 bg-white text-[16px] text-[#000000] border border-r-0 border-[#6EBD44] rounded-l-[6px] focus:outline-none placeholder:text-[#999999]"
               />
-              <button className="bg-[#6EBD44] text-white px-10 h-full rounded-r-[6px] text-[18px] font-bold hover:bg-[#5da539] transition-colors whitespace-nowrap">
+              <button className="bg-[#6EBD44] text-white px-10 h-full rounded-r-[6px] text-[18px] font-bold hover:bg-[#5da539] transition-colors whitespace-nowrap cursor-pointer">
                 Subscribe
               </button>
             </div>
 
             {/* Auth buttons */}
             <div className="flex gap-4 w-full max-w-[375px] mx-auto lg:mx-0">
-              <button className="flex-1 bg-[#6EBD44] text-white h-[43px] rounded-[22px] text-[15px] font-bold hover:bg-[#5da539] transition-colors uppercase">
+              <button className="flex-1 bg-[#6EBD44] text-white h-[43px] rounded-[22px] text-[15px] font-bold hover:bg-[#5da539] transition-colors uppercase cursor-pointer">
                 SIGN IN
               </button>
-              <button className="flex-1 bg-[#84E84F] text-white h-[43px] rounded-[22px] text-[15px] font-bold hover:bg-[#6EBD44] transition-colors uppercase">
+              <button className="flex-1 bg-[#84E84F] text-white h-[43px] rounded-[22px] text-[15px] font-bold hover:bg-[#6EBD44] transition-colors uppercase cursor-pointer">
                 SIGN UP
               </button>
             </div>
