@@ -19,14 +19,16 @@ export function WhyMarketers() {
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-10 lg:gap-12">
-          {/* Video Image - Left side */}
+          {/* Video - Left side */}
           <div className="lg:col-span-7 w-full order-1">
-            <div className="relative rounded-[20px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-transform hover:scale-[1.01] duration-500">
-              <img
-                src="/images/publisher-video-image.svg"
-                alt="Why Marketers Choose Us video"
-                className="w-full h-auto object-cover min-h-[250px] lg:min-h-[420px]"
-              />
+            <div className="relative rounded-[20px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-transform hover:scale-[1.01] duration-500 bg-black aspect-video">
+              <iframe
+                src="https://www.youtube.com/embed/d_1qbfemY68"
+                title="Why Marketers Choose Us"
+                className="absolute inset-0 w-full h-full border-0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
             </div>
           </div>
 

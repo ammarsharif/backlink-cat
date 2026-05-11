@@ -71,7 +71,7 @@ export function RecentWebsites() {
   useEffect(() => { load(); }, []);
 
   return (
-    <section className="py-20 bg-[#F9F9F9]">
+    <section className="pt-20 pb-10 bg-[#F9F9F9]">
       <Container className="max-w-[1534px]">
         <h2 className="text-[32px] md:text-[54px] font-bold text-center mb-16 font-[var(--font-heading)]">
           <span className="text-[#7FC142]">Recently Added</span> Websites

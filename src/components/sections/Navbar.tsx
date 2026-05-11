@@ -79,9 +79,11 @@ export function Navbar() {
                   <Link href="/login" className="text-[15px] font-medium text-gray-500 hover:text-[#6EBD44] transition-colors">
                     Login
                   </Link>
-                  <button className="bg-[#6EBD44] text-white px-6 py-2 text-[14px] font-bold tracking-wide rounded-[4px] hover:bg-[#5da539] transition-colors cursor-pointer">
-                    SIGN UP
-                  </button>
+                  <a href="https://app.backlinkcat.com/#/signup">
+                    <button className="bg-[#6EBD44] text-white px-6 py-2 text-[14px] font-bold tracking-wide rounded-[4px] hover:bg-[#5da539] transition-colors cursor-pointer">
+                      SIGN UP
+                    </button>
+                  </a>
                 </>
               )}
             </div>
@@ -139,9 +141,11 @@ export function Navbar() {
                       Login
                     </Button>
                   </Link>
-                  <Button variant="primary" size="sm" className="flex-1 cursor-pointer">
-                    SIGN UP
-                  </Button>
+                  <a href="https://app.backlinkcat.com/#/signup" className="flex-1">
+                    <Button variant="primary" size="sm" className="w-full cursor-pointer">
+                      SIGN UP
+                    </Button>
+                  </a>
                 </div>
               )}
             </div>

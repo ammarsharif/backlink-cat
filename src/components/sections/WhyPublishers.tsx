@@ -37,14 +37,16 @@ export function WhyPublishers() {
             </ul>
           </div>
 
-          {/* Video Image */}
+          {/* Video - Right side */}
           <div className="lg:col-span-7 order-1 lg:order-2 w-full">
-            <div className="relative rounded-[20px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-transform hover:scale-[1.01] duration-500">
-              <img
-                src="/images/publisher-video-image.svg"
-                alt="Why Publishers Choose Us video"
-                className="w-full h-auto object-cover min-h-[250px] lg:min-h-[420px]"
-              />
+            <div className="relative rounded-[20px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-transform hover:scale-[1.01] duration-500 bg-black aspect-video">
+              <iframe
+                src="https://www.youtube.com/embed/6vngBA4R6xs"
+                title="Why Publishers Choose Us"
+                className="absolute inset-0 w-full h-full border-0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
             </div>
           </div>
         </div>

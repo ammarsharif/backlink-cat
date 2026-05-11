@@ -44,11 +44,11 @@ export function Testimonials() {
     setCurrent((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
   };
 
-  // Adjust for loop display
-  const displayTestimonials = [...TESTIMONIALS, ...TESTIMONIALS].slice(current, current + 3);
+  // Adjust for loop display - show 3 items on desktop, 2 on tablet, 1 on mobile
+  const displayTestimonials = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS].slice(current, current + 3);
 
   return (
-    <section className="py-20 bg-[#F9F9F9] overflow-hidden">
+    <section className="pt-10 pb-20 bg-[#F9F9F9] overflow-hidden">
       <Container>
         <h2 className="text-[32px] md:text-[54px] font-bold text-center mb-16 font-[var(--font-heading)]">
           Customer <span className="text-[#7FC142]">Reviews</span>
@@ -83,14 +83,14 @@ export function Testimonials() {
               key={current}
             >
               <AnimatePresence mode="popLayout" initial={false}>
-                {displayTestimonials.slice(0, 2).map((t, idx) => (
+                {displayTestimonials.map((t, idx) => (
                   <motion.div
                     key={`${t.id}-${idx}`}
-                    initial={{ opacity: 0, x: 100 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -100 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    className="w-full md:w-[calc(50%-12px)] shrink-0 bg-white border border-[#E0E0E0] rounded-[24px] p-8 md:p-10 shadow-sm"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.4 }}
+                    className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] shrink-0 bg-white border border-[#E0E0E0] rounded-[24px] p-6 lg:p-8 shadow-sm flex flex-col justify-between"
                   >
                     <div className="flex items-center gap-5 mb-8">
                       <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden bg-gray-100 border-4 border-[#7FC142]/10 p-1 shrink-0">

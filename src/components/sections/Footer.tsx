@@ -53,7 +53,7 @@ export function Footer() {
               ))}
             </ul>
             <a 
-              href="#" 
+              href="https://app.backlinkcat.com/#/signup" 
               className="inline-block w-fit bg-white text-black font-bold px-6 py-2 rounded-[6px] text-[14px] uppercase tracking-wide hover:bg-gray-100 transition-colors"
             >
               SIGN UP

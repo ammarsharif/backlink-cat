@@ -1,21 +1,68 @@
+'use client';
+
+import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { Search } from "lucide-react";
+import { Search, AlertCircle } from "lucide-react";
 
 export function Hero() {
+  const [websiteUrl, setWebsiteUrl] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  const validateUrl = (url: string) => {
+    if (!url.trim()) {
+      return "Please enter a website URL";
+    }
+    
+    // Professional URL regex that supports with or without protocol
+    const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/;
+    if (!urlPattern.test(url)) {
+      return "Please enter a valid website address";
+    }
+    
+    return null;
+  };
+
+  const handleSearch = () => {
+    const validationError = validateUrl(websiteUrl);
+    setError(validationError);
+    
+    if (!validationError) {
+      console.log("Searching for:", websiteUrl);
+      // Proceed with search logic
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWebsiteUrl(e.target.value);
+    if (error) setError(null);
+  };
+
   return (
     <section className="relative w-full pt-[60px] pb-[10px] lg:pt-[90px] lg:pb-[10px]">
 
       <Container size="wide" className="relative z-10">
         {/* Floating Search Bar (Desktop) */}
-        <div className="hidden lg:flex w-full max-w-[1100px] h-[66px] bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-1.5 items-center absolute top-[-130px] left-1/2 -translate-x-1/2 z-20 border border-gray-100">
-          <div className="w-[30%] h-full flex flex-col justify-center px-8 border-r border-gray-200">
-            <label className="block text-[11px] font-extrabold text-[#000000] mb-0.5">WEBSITE URL</label>
+        <div className={`hidden lg:flex w-full max-w-[1100px] h-[66px] bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-1.5 items-center absolute top-[-130px] left-1/2 -translate-x-1/2 z-20 border transition-all duration-300 ${error ? 'border-red-400 ring-4 ring-red-50' : 'border-gray-100'}`}>
+          <div className="w-[30%] h-full flex flex-col justify-center px-8 border-r border-gray-200 relative">
+            <label className={`block text-[11px] font-extrabold mb-0.5 transition-colors ${error ? 'text-red-500' : 'text-[#000000]'}`}>
+              {error ? 'INVALID URL' : 'WEBSITE URL'}
+            </label>
             <input
               type="text"
+              value={websiteUrl}
+              onChange={handleInputChange}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
               placeholder="https://backlinkcat.com"
               className="w-full text-[13px] text-[#000000] bg-transparent focus:outline-none placeholder:text-[#d1d1d1]"
             />
+            {error && (
+              <div className="absolute -bottom-10 left-8 bg-red-500 text-white text-[11px] py-1 px-3 rounded-md animate-in fade-in slide-in-from-top-2 duration-300 flex items-center gap-1.5 whitespace-nowrap shadow-lg">
+                <AlertCircle size={12} />
+                {error}
+                <div className="absolute -top-1 left-4 w-2 h-2 bg-red-500 rotate-45" />
+              </div>
+            )}
           </div>
           {["DA", "DR", "TRAFFIC", "PRICE"].map((label) => (
             <div key={label} className="flex-1 h-full flex flex-col justify-center px-4 xl:px-6 border-r border-gray-200">
@@ -28,20 +75,28 @@ export function Hero() {
             </div>
           ))}
           <div className="px-2 pl-4 shrink-0">
-            <button className="bg-[#6EBD44] text-white cursor-pointer px-8 xl:px-10 h-[45px] rounded-full text-[15px] font-bold hover:bg-[#5da539] transition-colors flex items-center justify-center gap-2">
+            <button 
+              onClick={handleSearch}
+              className="bg-[#6EBD44] text-white cursor-pointer px-8 xl:px-10 h-[45px] rounded-full text-[15px] font-bold hover:bg-[#5da539] active:scale-95 transition-all flex items-center justify-center gap-2"
+            >
               LET'S GO <Search size={18} />
             </button>
           </div>
         </div>
 
         {/* Mobile Search Bar */}
-        <div className="flex lg:hidden flex-col w-full bg-white rounded-2xl shadow-lg p-4 gap-3 mb-8 border border-gray-100">
-          <div className="w-full">
-            <label className="block text-[11px] font-extrabold text-[#000000] mb-1">WEBSITE URL</label>
+        <div className={`flex lg:hidden flex-col w-full bg-white rounded-2xl shadow-lg p-4 gap-3 mb-8 border transition-all duration-300 ${error ? 'border-red-400' : 'border-gray-100'}`}>
+          <div className="w-full relative">
+            <div className="flex justify-between items-center mb-1">
+              <label className={`block text-[11px] font-extrabold transition-colors ${error ? 'text-red-500' : 'text-[#000000]'}`}>WEBSITE URL</label>
+              {error && <span className="text-[10px] text-red-500 font-bold animate-pulse">{error}</span>}
+            </div>
             <input
               type="text"
+              value={websiteUrl}
+              onChange={handleInputChange}
               placeholder="https://backlinkcat.com"
-              className="w-full h-10 px-4 rounded-lg bg-gray-50 text-[13px] focus:outline-none"
+              className={`w-full h-10 px-4 rounded-lg text-[13px] focus:outline-none transition-colors ${error ? 'bg-red-50 border border-red-200' : 'bg-gray-50 border border-transparent focus:bg-white focus:border-[#6EBD44]'}`}
             />
           </div>
           <div className="grid grid-cols-2 gap-3">
@@ -51,12 +106,15 @@ export function Hero() {
                 <input
                   type="text"
                   placeholder="Range"
-                  className="w-full h-10 px-4 rounded-lg bg-gray-50 text-[13px] focus:outline-none"
+                  className="w-full h-10 px-4 rounded-lg bg-gray-50 text-[13px] focus:outline-none border border-transparent focus:bg-white focus:border-[#6EBD44]"
                 />
               </div>
             ))}
           </div>
-          <button className="w-full bg-[#6EBD44] text-white h-12 rounded-lg text-[15px] font-bold mt-2 cursor-pointer">
+          <button 
+            onClick={handleSearch}
+            className="w-full bg-[#6EBD44] text-white h-12 rounded-lg text-[15px] font-bold mt-2 cursor-pointer active:scale-95 transition-transform"
+          >
             LET'S GO
           </button>
         </div>
@@ -64,7 +122,7 @@ export function Hero() {
         <div className="flex flex-col md:flex-row items-center gap-10 md:gap-0 mt-20 lg:mt-24">
           {/* Left - text content */}
           <div className="flex-1 w-full max-w-[747px] text-[#000000] text-center lg:text-left">
-            <h1 className="text-3xl sm:text-4xl lg:text-[54px] font-bold font-[var(--font-inter)] leading-[1.1] mb-2 tracking-normal">
+            <h1 className="text-3xl sm:text-4xl lg:text-[54px] font-bold font-[var(--font-inter)] leading-[1.1] mb-2 tracking-normal text-balance">
               Backlink Market Place
             </h1>
             <p className="text-xl lg:text-[54px] font-light mb-4 leading-[1.1] text-[#000000] font-[var(--font-inter)] tracking-normal">
@@ -96,9 +154,11 @@ export function Hero() {
               <button className="flex-1 bg-[#6EBD44] text-white h-[43px] rounded-[22px] text-[15px] font-bold hover:bg-[#5da539] transition-colors uppercase cursor-pointer">
                 SIGN IN
               </button>
-              <button className="flex-1 bg-[#84E84F] text-white h-[43px] rounded-[22px] text-[15px] font-bold hover:bg-[#6EBD44] transition-colors uppercase cursor-pointer">
-                SIGN UP
-              </button>
+              <a href="https://app.backlinkcat.com/#/signup" className="flex-1">
+                <button className="w-full bg-[#84E84F] text-white h-[43px] rounded-[22px] text-[15px] font-bold hover:bg-[#6EBD44] transition-colors uppercase cursor-pointer">
+                  SIGN UP
+                </button>
+              </a>
             </div>
           </div>
 
