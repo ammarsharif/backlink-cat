@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 
 const BLOG_POSTS = Array(6).fill(null).map((_, i) => ({
   id: `post-${i}`,
+  slug: `loft-office-with-vintage-decor-${i}`,
   image: "/images/blog-image.svg",
   title: "Loft Office With Vintage Decor For......",
   excerpt: "It's no secret that the digital industry is booming. From exciting startups to global brands, companies are reaching out to digital agencies, ...",

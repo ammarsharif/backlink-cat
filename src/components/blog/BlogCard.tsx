@@ -2,6 +2,7 @@
 
 interface BlogCardProps {
   id: string;
+  slug: string;
   image: string;
   title: string;
   excerpt: string;
@@ -10,11 +11,11 @@ interface BlogCardProps {
   date: string;
 }
 
-export function BlogCard({ id, image, title, excerpt, author, category, date }: BlogCardProps) {
+export function BlogCard({ id, slug, image, title, excerpt, author, category, date }: BlogCardProps) {
   return (
     <article className="flex flex-col sm:flex-row gap-6 md:gap-8 pb-10 border-b border-[#E8E8E8] last:border-0 last:pb-0 group">
       {/* Thumbnail */}
-      <a href="#" className="shrink-0 w-full sm:w-[220px] md:w-[270px] lg:w-[310px]">
+      <a href={`/blog/${slug}`} className="shrink-0 w-full sm:w-[220px] md:w-[270px] lg:w-[310px]">
         <div className="rounded-[20px] overflow-hidden aspect-[310/220] bg-gray-100 shadow-sm">
           <img
             src={image}
@@ -27,7 +28,7 @@ export function BlogCard({ id, image, title, excerpt, author, category, date }: 
       {/* Content */}
       <div className="flex-1 flex flex-col justify-center min-w-0">
         {/* Title */}
-        <a href="#">
+        <a href={`/blog/${slug}`}>
           <h2 className="text-[20px] md:text-[26px] font-bold text-[#111111] leading-snug mb-3 hover:text-[#6EBD44] transition-colors font-[var(--font-poppins)] line-clamp-2">
             {title}
           </h2>
@@ -64,7 +65,7 @@ export function BlogCard({ id, image, title, excerpt, author, category, date }: 
         <div className="flex flex-wrap items-center gap-4">
           {/* Continue Reading */}
           <a
-            href="#"
+            href={`/blog/${slug}`}
             className="inline-flex items-center gap-2 border border-[#6EBD44] text-[#6EBD44] px-6 py-2 rounded-full text-[14px] md:text-[15px] font-semibold hover:bg-[#6EBD44] hover:text-white active:scale-95 transition-all font-[var(--font-poppins)] shadow-sm hover:shadow-md"
           >
             Continue Reading
