@@ -4,6 +4,7 @@ import { Footer } from '@/components/sections/Footer';
 import { Container } from '@/components/ui/Container';
 import { Guarantees } from '@/components/sections/Guarantees';
 import { CategoryPageClient } from '@/components/marketplace/CategoryPageClient';
+import { redirect } from 'next/navigation';
 
 // In Next.js 15, params is a Promise — always await it before use.
 interface Props {
@@ -27,9 +28,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+
 export default async function CategoryPage({ params }: Props) {
   // Await params before reading slug (Next.js 15 requirement)
   const { slug } = await params;
+
+  if (slug === 'all') {
+    redirect('/category');
+  }
 
   return (
     <>

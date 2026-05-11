@@ -30,16 +30,16 @@ export default function ContactPage() {
                 
                 {/* Left - Text Content */}
                 <div className="flex-1 w-full text-center lg:text-left z-10 lg:pl-10 xl:pl-20 mt-10 lg:mt-0">
-                  <h1 className="text-[40px] md:text-[50px] lg:text-[63px] font-bold font-[var(--font-inter)] leading-[1] text-[#000000] mb-2 uppercase">
+                  <h1 className="text-[32px] md:text-[45px] lg:text-[54px] font-bold font-(--font-inter) leading-[1] text-[#000000] mb-2 uppercase">
                     HOW CAN WE HELP?
                   </h1>
-                  <p className="text-[40px] md:text-[50px] lg:text-[63px] font-normal font-[var(--font-inter)] leading-[1] text-[#000000]">
+                  <p className="text-[32px] md:text-[45px] lg:text-[54px] font-normal font-(--font-inter) leading-[1] text-[#000000]">
                     Send us a message!
                   </p>
                 </div>
                 
                 {/* Right - Cat Image */}
-                <div className="hidden lg:block absolute top-[-150px] w-[650px] xl:w-[800px] 2xl:w-[950px] z-10 pointer-events-none -right-10 xl:-right-20 2xl:-right-10">
+                <div className="hidden lg:block absolute top-[-100px] w-[550px] xl:w-[650px] 2xl:w-[750px] z-10 pointer-events-none -right-10 xl:-right-20 2xl:-right-10">
                   <img 
                     src="/images/cat-with-headpones.svg" 
                     alt="Cat with headphones"

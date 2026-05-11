@@ -13,7 +13,6 @@ const RELATED_CATEGORIES = [
 ];
 
 interface CategoryPageClientProps {
-  /** e.g. "all", "technology", "education" */
   slug: string;
 }
 

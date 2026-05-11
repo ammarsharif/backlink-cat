@@ -107,6 +107,15 @@ export function Categories() {
             <img src="/images/right-arrow.svg" alt="Next" className="w-[18px] h-[12px]" />
           </button>
         </div>
+
+        {/* View All Button */}
+        <div className="mt-12 flex justify-center">
+          <Link href="/category">
+            <button className="bg-[#6EBD44] text-white px-10 py-3 text-[16px] font-bold tracking-wide rounded-full hover:bg-[#5da539] transition-all transform active:scale-95 shadow-md cursor-pointer">
+              VIEW ALL
+            </button>
+          </Link>
+        </div>
       </Container>
     </section>
   );

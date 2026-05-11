@@ -9,19 +9,19 @@ import { Container } from "@/components/ui/Container";
 const TESTIMONIALS = [
   {
     id: "1",
-    name: "Paratha",
+    name: "Sarah Jenkins",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
     rating: 5,
     review:
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using content here, making it look like readable English.",
+      "Since switching to BacklinkCAT, our agency's outreach efficiency has skyrocketed. Finding high-authority publishers used to take weeks of negotiation, but now everything is streamlined in one transparent platform.",
   },
   {
     id: "2",
-    name: "Paratha",
+    name: "Michael Chen",
     avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
     rating: 5,
     review:
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, content here, making it look like readable English.",
+      "As a publisher, I love how seamless the workflow is. I get relevant, high-quality content pitched to me directly, and getting paid is always prompt and hassle-free. It's a game changer for monetizing my blogs.",
   },
   {
     id: "3",
