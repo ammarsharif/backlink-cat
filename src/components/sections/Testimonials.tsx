@@ -54,9 +54,9 @@ export function Testimonials() {
           Customer <span className="text-[#7FC142]">Reviews</span>
         </h2>
 
-        <div className="relative max-w-6xl mx-auto">
+        <div className="relative max-w-[1350px] mx-auto">
           {/* Controls */}
-          <div className="absolute top-1/2 -left-4 md:-left-12 -translate-y-1/2 z-20">
+          <div className="absolute top-1/2 -left-4 md:-left-14 -translate-y-1/2 z-20">
             <button
               onClick={prev}
               className="w-10 h-10 md:w-14 md:h-14 rounded-full bg-white shadow-[0_4px_20px_rgba(0,0,0,0.1)] flex items-center justify-center hover:bg-[#7FC142] hover:text-white transition-all group"

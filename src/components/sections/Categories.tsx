@@ -16,14 +16,17 @@ const CATEGORIES = [
 
 export function Categories() {
   const [active, setActive] = useState('health');
-  const [index, setIndex] = useState(CATEGORIES.length); // Start at the middle set
+  const [index, setIndex] = useState(CATEGORIES.length); // Start at the middle set for seamless looping
   const [isAnimating, setIsAnimating] = useState(false);
   
-  const cardWidth = 280;
-  const gap = 30;
+  const cardWidth = 220;
+  const gap = 24;
   const totalWidth = cardWidth + gap;
+  // Make the mask fit exactly 5 items: (5 * 220) + (4 * 24) = 1196px
+  const visibleItems = 5;
+  const sliderWidth = (cardWidth * visibleItems) + (gap * (visibleItems - 1));
 
-  // Triple the items for infinite effect
+  // Triple the items so we have [1,2,3,4,5] [1,2,3,4,5] [1,2,3,4,5]
   const tripledItems = [...CATEGORIES, ...CATEGORIES, ...CATEGORIES];
 
   const handlePrev = () => {
@@ -40,40 +43,37 @@ export function Categories() {
 
   const onAnimationComplete = () => {
     setIsAnimating(false);
-    // Reset to middle set if we reach the ends
-    if (index <= 0) {
+    // Reset index seamlessly to inner group
+    if (index === 0) {
       setIndex(CATEGORIES.length);
-    } else if (index >= CATEGORIES.length * 2 - 1) {
-      setIndex(CATEGORIES.length - 1);
+    } else if (index === CATEGORIES.length * 2) {
+      setIndex(CATEGORIES.length);
     }
   };
 
-  // Calculate centered offset
-  // We want the middle of the viewport to be the focus
-  // Container is max-w-[1521px]
   return (
-    <section className="py-12 bg-transparent relative z-10 overflow-hidden">
+    <section className="py-8 bg-transparent relative z-10">
       <Container size="wide" className="max-w-[1580px]">
-        <h2 className="text-[32px] md:text-[40px] font-bold text-center mb-10 text-[#000000]">
+        <h2 className="text-[28px] md:text-[36px] font-bold text-center mb-8 text-[#000000]">
           All Categories
         </h2>
 
-        <div className="relative w-full max-w-[1521px] mx-auto">
+        <div className="relative mx-auto w-full max-w-[1196px]">
           {/* Prev arrow */}
           <button
             onClick={handlePrev}
-            className="absolute left-[-22px] top-1/2 -translate-y-1/2 w-[44px] h-[44px] rounded-full bg-[#6EBD44] flex items-center justify-center hover:bg-[#5da539] transition-all shadow-md z-20 cursor-pointer"
+            className="absolute left-[-50px] top-1/2 -translate-y-1/2 w-[44px] h-[44px] rounded-full bg-[#6EBD44] flex items-center justify-center hover:bg-[#5da539] transition-all shadow-md z-20 cursor-pointer hidden md:flex"
             aria-label="Previous"
           >
             <img src="/images/left-arrow.svg" alt="Prev" className="w-[18px] h-[12px]" />
           </button>
 
-          {/* Sliding container */}
-          <div className="overflow-hidden px-4">
+          {/* Sliding container mask */}
+          <div className="overflow-hidden mx-auto py-6 -my-6" style={{ maxWidth: `${sliderWidth}px` }}>
             <motion.div
-              className="flex gap-[30px]"
+              className="flex gap-[24px]"
               initial={false}
-              animate={{ x: -(index * totalWidth) + (1521 / 2) - (cardWidth / 2) - 16 }} // -16 for px-4 padding adjustment
+              animate={{ x: -(index * totalWidth) }}
               transition={{ type: "spring", stiffness: 200, damping: 25 }}
               onAnimationComplete={onAnimationComplete}
             >
@@ -83,14 +83,16 @@ export function Categories() {
                   href={`/category/${item.id}`}
                   onClick={() => setActive(item.id)}
                   className={cn(
-                    'flex flex-col items-center justify-center gap-4 w-[280px] h-[202px] rounded-[15px] transition-all duration-300 shrink-0 bg-white/80 backdrop-blur-sm border-[1px] border-[#C3B6B6] shadow-[0px_7px_14px_rgba(0,0,0,0.16)] hover:shadow-lg',
-                    active === item.id ? 'border-[#6EBD44] ring-1 ring-[#6EBD44]/20' : ''
+                    'flex flex-col items-center justify-center gap-3 w-[220px] h-[160px] rounded-[15px] transition-all duration-300 shrink-0 bg-white/90 backdrop-blur-sm border-[1px] shadow-[0px_7px_14px_rgba(0,0,0,0.1)] hover:shadow-md hover:-translate-y-1',
+                    active === item.id 
+                      ? 'border-[#6EBD44] ring-1 ring-[#6EBD44]/20' 
+                      : 'border-[#E0E0E0]'
                   )}
                 >
-                  <div className="w-[60px] h-[60px] flex items-center justify-center mb-1">
+                  <div className="w-[50px] h-[50px] flex items-center justify-center mb-1 group-hover:scale-110 transition-transform">
                     <img src={item.icon} alt={item.label} className="w-full h-full object-contain" />
                   </div>
-                  <span className="text-[18px] md:text-[20px] font-medium text-[#000000]">{item.label}</span>
+                  <span className="text-[18px] font-medium text-[#000000]">{item.label}</span>
                 </Link>
               ))}
             </motion.div>
@@ -99,7 +101,7 @@ export function Categories() {
           {/* Next arrow */}
           <button
             onClick={handleNext}
-            className="absolute right-[-22px] top-1/2 -translate-y-1/2 w-[44px] h-[44px] rounded-full bg-[#6EBD44] flex items-center justify-center hover:bg-[#5da539] transition-all shadow-md z-20 cursor-pointer"
+            className="absolute right-[-50px] top-1/2 -translate-y-1/2 w-[44px] h-[44px] rounded-full bg-[#6EBD44] flex items-center justify-center hover:bg-[#5da539] transition-all shadow-md z-20 cursor-pointer hidden md:flex"
             aria-label="Next"
           >
             <img src="/images/right-arrow.svg" alt="Next" className="w-[18px] h-[12px]" />
@@ -109,3 +111,4 @@ export function Categories() {
     </section>
   );
 }
+

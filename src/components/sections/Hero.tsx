@@ -43,8 +43,8 @@ export function Hero() {
 
       <Container size="wide" className="relative z-10">
         {/* Floating Search Bar (Desktop) */}
-        <div className={`hidden lg:flex w-full max-w-[1100px] h-[66px] bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-1.5 items-center absolute top-[-130px] left-1/2 -translate-x-1/2 z-20 border transition-all duration-300 ${error ? 'border-red-400 ring-4 ring-red-50' : 'border-gray-100'}`}>
-          <div className="w-[30%] h-full flex flex-col justify-center px-8 border-r border-gray-200 relative">
+        <div className={`hidden lg:flex w-full max-w-[1000px] h-[58px] bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-1.5 items-center absolute top-[-100px] left-1/2 -translate-x-1/2 z-20 border transition-all duration-300 ${error ? 'border-red-400 ring-4 ring-red-50' : 'border-gray-100'}`}>
+          <div className="w-[30%] h-full flex flex-col justify-center px-6 border-r border-gray-200 relative">
             <label className={`block text-[11px] font-extrabold mb-0.5 transition-colors ${error ? 'text-red-500' : 'text-[#000000]'}`}>
               {error ? 'INVALID URL' : 'WEBSITE URL'}
             </label>
@@ -77,9 +77,9 @@ export function Hero() {
           <div className="px-2 pl-4 shrink-0">
             <button 
               onClick={handleSearch}
-              className="bg-[#6EBD44] text-white cursor-pointer px-8 xl:px-10 h-[45px] rounded-full text-[15px] font-bold hover:bg-[#5da539] active:scale-95 transition-all flex items-center justify-center gap-2"
+              className="bg-[#6EBD44] text-white cursor-pointer px-8 h-[40px] rounded-full text-[14px] font-bold hover:bg-[#5da539] active:scale-95 transition-all flex items-center justify-center gap-2"
             >
-              LET'S GO <Search size={18} />
+              LET'S GO <Search size={16} />
             </button>
           </div>
         </div>
@@ -119,32 +119,32 @@ export function Hero() {
           </button>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center gap-10 md:gap-0 mt-20 lg:mt-24">
+        <div className="flex flex-col md:flex-row items-center gap-10 md:gap-0 mt-16 lg:mt-20">
           {/* Left - text content */}
           <div className="flex-1 w-full max-w-[747px] text-[#000000] text-center lg:text-left">
-            <h1 className="text-3xl sm:text-4xl lg:text-[54px] font-bold font-[var(--font-inter)] leading-[1.1] mb-2 tracking-normal text-balance">
+            <h1 className="text-3xl sm:text-4xl lg:text-[46px] font-bold font-[var(--font-inter)] leading-[1.1] mb-2 tracking-normal text-balance">
               Backlink Market Place
             </h1>
-            <p className="text-xl lg:text-[54px] font-light mb-4 leading-[1.1] text-[#000000] font-[var(--font-inter)] tracking-normal">
+            <p className="text-xl lg:text-[38px] font-light mb-4 leading-[1.1] text-[#000000] font-[var(--font-inter)] tracking-normal">
               Buy & Sell Guest Post with us<br />at Best Prices.
             </p>
-            <p className="text-[16px] lg:text-[21px] font-light text-[#000000] mb-4 max-w-[747px] leading-[1.1] font-[var(--font-inter)] tracking-normal">
+            <p className="text-[15px] lg:text-[18px] font-light text-[#000000] mb-4 max-w-[747px] leading-[1.3] font-[var(--font-inter)] tracking-normal">
               Join BACKLINKCAT and monetize your blog with great recurring
               commissions. We have more than 100K bloggers and more than 1000
               clients.
             </p>
-            <p className="text-[16px] lg:text-[21px] font-light text-[#000000] mb-4 font-[var(--font-inter)] leading-[1.2] tracking-normal">
+            <p className="text-[15px] lg:text-[18px] font-light text-[#000000] mb-6 font-[var(--font-inter)] leading-[1.2] tracking-normal">
               Just SIgnUp and Subscribe for all updates!
             </p>
 
             {/* Email subscribe */}
-            <div className="flex w-full max-w-[659px] h-[57px] mb-6 shadow-sm mx-auto lg:mx-0">
+            <div className="flex w-full max-w-[550px] h-[50px] mb-6 shadow-sm mx-auto lg:mx-0">
               <input
                 type="email"
                 placeholder="Enter your email!"
-                className="flex-1 px-6 bg-white text-[16px] text-[#000000] border border-r-0 border-[#6EBD44] rounded-l-[6px] focus:outline-none placeholder:text-[#999999]"
+                className="flex-1 px-5 bg-white text-[15px] text-[#000000] border border-r-0 border-[#6EBD44] rounded-l-[6px] focus:outline-none placeholder:text-[#999999]"
               />
-              <button className="bg-[#6EBD44] text-white px-10 h-full rounded-r-[6px] text-[18px] font-bold hover:bg-[#5da539] transition-colors whitespace-nowrap cursor-pointer">
+              <button className="bg-[#6EBD44] text-white px-8 h-full rounded-r-[6px] text-[16px] font-bold hover:bg-[#5da539] transition-colors whitespace-nowrap cursor-pointer">
                 Subscribe
               </button>
             </div>
@@ -163,8 +163,8 @@ export function Hero() {
           </div>
 
           {/* Right - cat illustration */}
-          <div className="hidden lg:flex flex-1 justify-center lg:justify-end items-start relative w-full mt-10 lg:mt-0">
-            <div className="relative w-[280px] h-[325px] sm:w-[340px] sm:h-[395px] md:w-[420px] md:h-[485px] lg:w-[480px] lg:h-[555px] xl:w-[578px] xl:h-[670px] lg:translate-y-[40px] xl:translate-y-[60px] lg:-translate-x-10 xl:-translate-x-20">
+          <div className="hidden lg:flex flex-1 justify-center lg:justify-end items-start relative w-full mt-6 lg:mt-0">
+            <div className="relative w-[280px] h-[325px] sm:w-[340px] sm:h-[395px] md:w-[380px] md:h-[440px] lg:w-[420px] lg:h-[485px] xl:w-[480px] xl:h-[555px] lg:translate-y-[20px] xl:translate-y-[30px] lg:-translate-x-5 xl:-translate-x-10">
               <img
                 src="/images/main-cat-image.svg"
                 alt="BacklinkCAT mascot"

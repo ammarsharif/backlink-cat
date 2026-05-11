@@ -7,11 +7,13 @@ interface BlogCardProps {
   title: string;
   excerpt: string;
   author: string;
+  authorAvatar?: string;
   category: string;
   date: string;
+  readTime?: number;
 }
 
-export function BlogCard({ id, slug, image, title, excerpt, author, category, date }: BlogCardProps) {
+export function BlogCard({ id, slug, image, title, excerpt, author, authorAvatar, category, date, readTime }: BlogCardProps) {
   return (
     <article className="flex flex-col sm:flex-row gap-6 md:gap-8 pb-10 border-b border-[#E8E8E8] last:border-0 last:pb-0 group">
       {/* Thumbnail */}
@@ -46,7 +48,12 @@ export function BlogCard({ id, slug, image, title, excerpt, author, category, da
         <div className="flex flex-wrap items-center gap-1.5 mb-5 text-[13px] md:text-[15px] text-[#666666] font-[var(--font-inter)]">
           {/* Author avatar */}
           <div className="w-[26px] h-[26px] rounded-full overflow-hidden bg-gray-200 shrink-0 mr-1">
-            <img src="/images/latest-posts.svg" alt={author} className="w-full h-full object-cover" />
+            <img
+              src={authorAvatar || '/images/latest-posts.svg'}
+              alt={author}
+              className="w-full h-full object-cover"
+              onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/images/latest-posts.svg'; }}
+            />
           </div>
           <span>
             By: <span className="font-semibold text-[#333]">{author}</span>
@@ -55,10 +62,12 @@ export function BlogCard({ id, slug, image, title, excerpt, author, category, da
           <span>{category}</span>
           <span className="text-[#CCC] mx-1">|</span>
           <span>{date}</span>
-          <span className="text-[#CCC] mx-1">|</span>
-          <a href="#" className="text-[#6EBD44] hover:underline font-medium transition-colors">
-            Leave a comment
-          </a>
+          {readTime && (
+            <>
+              <span className="text-[#CCC] mx-1">|</span>
+              <span>{readTime} min read</span>
+            </>
+          )}
         </div>
 
         {/* Actions row */}
