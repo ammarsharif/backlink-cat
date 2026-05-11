@@ -9,7 +9,7 @@ import { TrustedPublishers } from '@/components/sections/TrustedPublishers';
 import { LatestPosts } from '@/components/sections/LatestPosts';
 import { Footer } from '@/components/sections/Footer';
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
       <Navbar />

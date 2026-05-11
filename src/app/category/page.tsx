@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: 'Browse all premium websites for high-quality backlinks. Filter by DA, DR, traffic, niche, and price.',
 };
 
-export default function CategoryIndexPage() {
+export default async function CategoryIndexPage() {
   return (
     <>
       <Navbar />

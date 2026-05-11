@@ -8,7 +8,7 @@ export const metadata = {
   description: 'Send us a message and we will get back to you.',
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
   return (
     <>
       <Navbar />
