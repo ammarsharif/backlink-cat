@@ -3,7 +3,7 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Loader2 } from "lucide-react";
+import { FullscreenLoading } from "@/components/ui/FullscreenLoading";
 
 export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -24,11 +24,7 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   }, [user, loading, pathname, router]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA]">
-        <Loader2 className="animate-spin text-[#6EBD44]" size={40} />
-      </div>
-    );
+    return <FullscreenLoading />;
   }
 
   if (!user && pathname !== "/login") {
