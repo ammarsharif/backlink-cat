@@ -14,9 +14,9 @@ export default async function Home() {
     <>
       <Navbar />
       <main>
-        <div className="relative overflow-hidden w-full min-h-[1400px] flex flex-col">
+        <div className="relative overflow-hidden w-full min-h-[1250px] flex flex-col">
           {/* Main Background Image spanning Hero and Categories */}
-          <div className="absolute top-0 left-0 w-full h-[1400px] pointer-events-none z-0">
+          <div className="absolute top-0 left-0 w-full h-[1250px] pointer-events-none z-0">
             <img 
               src="/images/bg-colored-image.svg" 
               alt="" 

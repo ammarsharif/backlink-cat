@@ -54,7 +54,7 @@ export function Categories() {
   return (
     <section className="py-8 bg-transparent relative z-10">
       <Container size="wide" className="max-w-[1580px]">
-        <h2 className="text-[28px] md:text-[36px] lg:text-[40px] font-bold text-center mb-8 text-[#000000]">
+        <h2 className="text-[24px] md:text-[36px] lg:text-[40px] font-bold text-center mb-8 text-[#000000] font-[var(--font-inter)] tracking-tight">
           All Categories
         </h2>
 
@@ -62,16 +62,16 @@ export function Categories() {
           {/* Prev arrow */}
           <button
             onClick={handlePrev}
-            className="absolute left-[-50px] top-1/2 -translate-y-1/2 w-[44px] h-[44px] rounded-full bg-[#6EBD44] flex items-center justify-center hover:bg-[#5da539] transition-all shadow-md z-20 cursor-pointer hidden md:flex"
+            className="absolute left-2 xl:left-[-60px] top-1/2 -translate-y-1/2 w-[36px] h-[36px] md:w-[44px] md:h-[44px] rounded-full bg-[#6EBD44] flex items-center justify-center hover:bg-[#5da539] transition-all shadow-xl z-50 cursor-pointer"
             aria-label="Previous"
           >
-            <img src="/images/left-arrow.svg" alt="Prev" className="w-[18px] h-[12px]" />
+            <img src="/images/left-arrow.svg" alt="Prev" className="w-[14px] md:w-[18px] h-auto" />
           </button>
 
           {/* Sliding container mask */}
-          <div className="overflow-hidden mx-auto py-6 -my-6" style={{ maxWidth: `${sliderWidth}px` }}>
+          <div className="overflow-hidden mx-auto py-6 -my-6 px-4 md:px-0">
             <motion.div
-              className="flex gap-[24px]"
+              className="flex gap-4 md:gap-[24px]"
               initial={false}
               animate={{ x: -(index * totalWidth) }}
               transition={{ type: "spring", stiffness: 200, damping: 25 }}
@@ -83,16 +83,16 @@ export function Categories() {
                   href={`/category/${item.id}`}
                   onClick={() => setActive(item.id)}
                   className={cn(
-                    'flex flex-col items-center justify-center gap-3 w-[220px] h-[160px] rounded-[15px] transition-all duration-300 shrink-0 bg-white/90 backdrop-blur-sm border-[1px] shadow-[0px_7px_14px_rgba(0,0,0,0.1)] hover:shadow-md hover:-translate-y-1',
+                    'flex flex-col items-center justify-center gap-3 w-[160px] h-[120px] md:w-[220px] md:h-[160px] rounded-[15px] transition-all duration-300 shrink-0 bg-white/90 backdrop-blur-sm border-[1px] shadow-[0px_7px_14px_rgba(0,0,0,0.1)] hover:shadow-md hover:-translate-y-1',
                     active === item.id 
                       ? 'border-[#6EBD44] ring-1 ring-[#6EBD44]/20' 
                       : 'border-[#E0E0E0]'
                   )}
                 >
-                  <div className="w-[50px] h-[50px] flex items-center justify-center mb-1 group-hover:scale-110 transition-transform">
+                  <div className="w-[40px] h-[40px] md:w-[50px] md:h-[50px] flex items-center justify-center mb-1 group-hover:scale-110 transition-transform">
                     <img src={item.icon} alt={item.label} className="w-full h-full object-contain" />
                   </div>
-                  <span className="text-[18px] font-medium text-[#000000]">{item.label}</span>
+                  <span className="text-[16px] md:text-[18px] font-medium text-[#000000]">{item.label}</span>
                 </Link>
               ))}
             </motion.div>
@@ -101,10 +101,10 @@ export function Categories() {
           {/* Next arrow */}
           <button
             onClick={handleNext}
-            className="absolute right-[-50px] top-1/2 -translate-y-1/2 w-[44px] h-[44px] rounded-full bg-[#6EBD44] flex items-center justify-center hover:bg-[#5da539] transition-all shadow-md z-20 cursor-pointer hidden md:flex"
+            className="absolute right-2 xl:right-[-60px] top-1/2 -translate-y-1/2 w-[36px] h-[36px] md:w-[44px] md:h-[44px] rounded-full bg-[#6EBD44] flex items-center justify-center hover:bg-[#5da539] transition-all shadow-xl z-50 cursor-pointer"
             aria-label="Next"
           >
-            <img src="/images/right-arrow.svg" alt="Next" className="w-[18px] h-[12px]" />
+            <img src="/images/right-arrow.svg" alt="Next" className="w-[14px] md:w-[18px] h-auto" />
           </button>
         </div>
 

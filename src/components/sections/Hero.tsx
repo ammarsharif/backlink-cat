@@ -122,11 +122,11 @@ export function Hero() {
         <div className="flex flex-col md:flex-row items-center gap-10 md:gap-0 mt-16 lg:mt-20">
           {/* Left - text content */}
           <div className="flex-1 w-full max-w-[747px] text-[#000000] text-center lg:text-left">
-            <h1 className="text-3xl sm:text-4xl lg:text-[46px] font-bold font-[var(--font-inter)] leading-[1.1] mb-2 tracking-normal text-balance">
+            <h1 className="text-[26px] sm:text-[36px] lg:text-[46px] font-bold font-[var(--font-inter)] leading-[1.2] mb-3 tracking-tight text-balance px-4 lg:px-0">
               Backlink Market Place
             </h1>
-            <p className="text-xl lg:text-[38px] font-light mb-4 leading-[1.1] text-[#000000] font-[var(--font-inter)] tracking-normal">
-              Buy & Sell Guest Post with us<br />at Best Prices.
+            <p className="text-[18px] sm:text-[24px] lg:text-[38px] font-light mb-4 leading-tight text-[#000000] font-[var(--font-inter)] tracking-normal px-4 lg:px-0">
+              Buy & Sell Guest Post with us <br className="hidden sm:block" />at Best Prices.
             </p>
             <p className="text-[15px] lg:text-[18px] font-light text-[#000000] mb-4 max-w-[747px] leading-[1.3] font-[var(--font-inter)] tracking-normal">
               Join BACKLINKCAT and monetize your blog with great recurring
