@@ -27,12 +27,12 @@ export default async function NotFound() {
           </div>
 
           {/* Heading */}
-          <h1 className="text-[#6EBD44] font-bold font-(--font-inter) text-[28px] md:text-[38px] lg:text-[45px] leading-tight mb-2 tracking-tight">
+          <h1 className="text-[#6EBD44] font-bold font-(--font-inter) text-[28px] md:text-[36px] lg:text-[42px] leading-tight mb-2 tracking-tight">
             This page doesn't exist.
           </h1>
           
           {/* Subtitle */}
-          <p className="text-black font-normal font-(--font-inter) text-[16px] md:text-[20px] lg:text-[24px] leading-snug mb-6 lg:mb-8 max-w-[90%] mx-auto">
+          <p className="text-black font-normal font-(--font-inter) text-[15px] md:text-[18px] lg:text-[20px] leading-snug mb-6 lg:mb-8 max-w-[90%] mx-auto">
             Please return to the previous page or visit{' '}
             <Link href="/" className="hover:text-[#6EBD44] transition-colors">
               backlinkcat.com

@@ -14,7 +14,7 @@ export function WhyMarketers() {
   return (
     <section className="py-20 bg-white overflow-hidden">
       <Container className="max-w-[1440px]">
-        <h2 className="text-[32px] md:text-[40px] lg:text-[48px] font-bold text-center mb-12 font-[var(--font-heading)] leading-tight">
+        <h2 className="text-[28px] md:text-[36px] lg:text-[42px] font-bold text-center mb-12 font-[var(--font-heading)] leading-tight">
           <span className="text-[#7FC142]">Why Marketers</span> Choose Us?
         </h2>
 
@@ -42,7 +42,7 @@ export function WhyMarketers() {
                     alt="icon" 
                     className="w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 mt-1 lg:mt-1.5 shrink-0" 
                   />
-                  <span className="text-[16px] md:text-[20px] lg:text-[24px] lg:leading-[40px] text-black font-normal">
+                  <span className="text-[15px] md:text-[18px] lg:text-[20px] lg:leading-[32px] text-black font-normal">
                     {feature}
                   </span>
                 </li>

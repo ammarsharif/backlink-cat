@@ -22,7 +22,7 @@ export default function BlogPage() {
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 pt-12 pb-20">
             {/* Main Content */}
             <div className="flex-1 min-w-0">
-              <h2 className="text-[40px] md:text-[52px] font-bold mb-10 font-[var(--font-poppins)]">
+              <h2 className="text-[28px] md:text-[36px] lg:text-[42px] font-bold mb-10 font-[var(--font-poppins)]">
                 <span className="text-[#6EBD44]">Latest</span> Posts
               </h2>
 

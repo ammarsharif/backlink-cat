@@ -9,7 +9,7 @@ export function BlogSidebar() {
     <aside className="w-full space-y-8 lg:sticky lg:top-24">
       {/* Search Blogs */}
       <div className="bg-white border border-[#F2F2F2] rounded-[4px] p-6 shadow-sm">
-        <h3 className="text-[28px] font-bold text-center mb-8 text-black font-[var(--font-poppins)]">Search Blogs</h3>
+        <h3 className="text-[20px] font-bold text-center mb-6 text-black font-[var(--font-poppins)]">Search Blogs</h3>
         <div className="space-y-3">
           <div className="relative">
             <svg
@@ -37,10 +37,10 @@ export function BlogSidebar() {
 
       {/* Subscribe Us */}
       <div className="bg-white border border-[#F2F2F2] rounded-[4px] p-6 shadow-sm text-center">
-        <h3 className="text-[28px] font-bold text-center mb-2 text-black font-[var(--font-poppins)]">
+        <h3 className="text-[20px] font-bold text-center mb-2 text-black font-[var(--font-poppins)]">
           <span className="text-[#6EBD44]">Latest</span> Posts
         </h3>
-        <p className="text-[14px] text-[#888] mb-1 font-[var(--font-inter)]">Subscribe Us</p>
+        <p className="text-[13px] text-[#888] mb-1 font-[var(--font-inter)]">Subscribe Us</p>
         <p className="text-[13px] text-[#999] mb-6 font-[var(--font-inter)]">
           Get the daily delivery about news to your inbox.
         </p>
@@ -60,8 +60,8 @@ export function BlogSidebar() {
 
       {/* Follow Us */}
       <div className="bg-white border border-[#F2F2F2] rounded-[4px] p-6 shadow-sm">
-        <h3 className="text-[28px] font-bold text-center mb-10 text-black font-[var(--font-poppins)]">Follow Us</h3>
-        <div className="flex flex-col gap-6 items-center px-4">
+        <h3 className="text-[20px] font-bold text-center mb-8 text-black font-[var(--font-poppins)]">Follow Us</h3>
+        <div className="flex flex-col gap-4 items-center px-4">
           <SocialLink icon="/images/linkedin-colored.svg" label="Linkedin" />
           <SocialLink icon="/images/instagram-colored.svg" label="Instagram" />
           <SocialLink icon="/images/facebook-colored.svg" label="Facebook" />
@@ -75,11 +75,11 @@ export function BlogSidebar() {
 
 function SocialLink({ icon, label }: { icon: string; label: string }) {
   return (
-    <a href="#" className="flex items-center gap-6 w-full group transition-all">
-      <div className="w-[28px] h-[28px] flex items-center justify-center shrink-0">
+    <a href="#" className="flex items-center gap-4 w-full group transition-all">
+      <div className="w-[20px] h-[20px] flex items-center justify-center shrink-0">
         <img src={icon} alt={label} className="w-full h-full object-contain group-hover:scale-110 transition-transform" />
       </div>
-      <span className="text-[24px] font-medium text-[#444444] group-hover:text-[#6EBD44] transition-colors font-[var(--font-inter)]">
+      <span className="text-[16px] md:text-[18px] font-medium text-[#444444] group-hover:text-[#6EBD44] transition-colors font-[var(--font-inter)]">
         {label}
       </span>
     </a>

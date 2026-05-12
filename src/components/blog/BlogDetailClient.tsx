@@ -131,7 +131,7 @@ export function BlogDetailClient({ slug }: BlogDetailClientProps) {
             </div>
 
             {/* Title */}
-            <h1 className="text-[32px] md:text-[48px] font-bold text-[#111111] leading-[1.2] mb-8 font-(--font-poppins)">
+            <h1 className="text-[28px] md:text-[38px] lg:text-[44px] font-bold text-[#111111] leading-[1.2] mb-8 font-(--font-poppins)">
               {post.title}
             </h1>
 

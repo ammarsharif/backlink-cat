@@ -41,7 +41,7 @@ export function TrustedPublishers() {
   return (
     <section className="py-20 bg-white border-y border-[#F0F0F0] overflow-hidden">
       <Container>
-        <h2 className="text-[28px] md:text-[42px] font-bold text-center mb-16 font-[var(--font-inter)] tracking-tight">
+        <h2 className="text-[28px] md:text-[36px] lg:text-[40px] font-bold text-center mb-16 font-[var(--font-inter)] tracking-tight">
           100K+ Trusted Publishers <span className="text-[#6EBD44]">Worldwide</span>
         </h2>
 

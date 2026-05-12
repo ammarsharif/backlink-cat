@@ -54,7 +54,7 @@ export function Categories() {
   return (
     <section className="py-8 bg-transparent relative z-10">
       <Container size="wide" className="max-w-[1580px]">
-        <h2 className="text-[28px] md:text-[36px] font-bold text-center mb-8 text-[#000000]">
+        <h2 className="text-[28px] md:text-[36px] lg:text-[40px] font-bold text-center mb-8 text-[#000000]">
           All Categories
         </h2>
 

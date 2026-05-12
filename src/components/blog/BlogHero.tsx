@@ -56,7 +56,7 @@ export function BlogHero() {
                   {slide.category}
                 </span>
                 <h1
-                  className="text-[26px] md:text-[48px] font-bold leading-snug mb-2 font-[var(--font-poppins)]"
+                  className="text-[24px] md:text-[38px] lg:text-[42px] font-bold leading-snug mb-2 font-[var(--font-poppins)]"
                   style={{
                     color: '#ffffff',
                     textShadow: '0 2px 16px rgba(0,0,0,0.9), 0 1px 6px rgba(0,0,0,0.8)',

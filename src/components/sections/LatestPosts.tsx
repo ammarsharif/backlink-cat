@@ -42,7 +42,7 @@ export function LatestPosts() {
   return (
     <section className="py-20 bg-white">
       <Container className="max-w-[1534px]">
-        <h2 className="text-[32px] md:text-[54px] font-bold text-center mb-16 font-[var(--font-heading)]">
+        <h2 className="text-[28px] md:text-[36px] lg:text-[42px] font-bold text-center mb-16 font-[var(--font-heading)]">
           Latest <span className="text-[#6EBD44]">Posts</span>
         </h2>
 

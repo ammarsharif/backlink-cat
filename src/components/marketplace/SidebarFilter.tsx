@@ -324,7 +324,7 @@ export function SidebarFilter({ onFiltersChange }: SidebarFilterProps) {
     <aside className="w-full flex flex-col gap-8 shrink-0">
       {/* Filter Section */}
       <div className="bg-white border border-[#F2F2F2] rounded-[4px] p-6 shadow-sm">
-        <h2 className="text-[28px] font-bold text-center mb-4 text-black">Filter By</h2>
+        <h2 className="text-[20px] font-bold text-center mb-4 text-black">Filter By</h2>
 
         <ActiveFiltersBar count={activeFilterCount} onReset={resetAll} />
 
@@ -434,15 +434,15 @@ export function SidebarFilter({ onFiltersChange }: SidebarFilterProps) {
 
       {/* Follow Us */}
       <div className="bg-white border border-[#F2F2F2] rounded-[4px] p-6 shadow-sm">
-        <h2 className="text-[28px] font-bold text-center mb-10 text-black">Follow Us</h2>
-        <div className="flex flex-col gap-6 items-center px-4">
+        <h2 className="text-[20px] font-bold text-center mb-8 text-black">Follow Us</h2>
+        <div className="flex flex-col gap-4 items-center px-4">
           {SOCIAL_LINKS.map((social) => (
             <a
               key={social.name}
               href="#"
               className="flex items-center gap-6 w-full group transition-all"
             >
-              <div className="w-[28px] h-[28px] flex items-center justify-center shrink-0">
+              <div className="w-[20px] h-[20px] flex items-center justify-center shrink-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={social.icon}
@@ -450,7 +450,7 @@ export function SidebarFilter({ onFiltersChange }: SidebarFilterProps) {
                   className="w-full h-full object-contain group-hover:scale-110 transition-transform"
                 />
               </div>
-              <span className="text-[24px] font-medium text-[#444444] group-hover:text-[#7FC142] transition-colors">
+              <span className="text-[16px] md:text-[18px] font-medium text-[#444444] group-hover:text-[#7FC142] transition-colors">
                 {social.name}
               </span>
             </a>
