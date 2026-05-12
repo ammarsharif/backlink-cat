@@ -39,7 +39,7 @@ export function Hero() {
   };
 
   return (
-    <section className="relative w-full pt-[60px] pb-[10px] lg:pt-[90px] lg:pb-[10px]">
+    <section className="relative w-full pt-[40px] pb-[10px] lg:pt-[60px] lg:pb-[10px]">
 
       <Container size="wide" className="relative z-10">
         {/* Floating Search Bar (Desktop) */}
