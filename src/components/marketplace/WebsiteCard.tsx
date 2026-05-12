@@ -287,10 +287,12 @@ export function WebsiteCard({ firestoreData, site }: WebsiteCardProps) {
           </span>
         </div>
 
-        <Button className="w-full h-[48px] bg-[#7FC142] hover:bg-[#6EBD44] text-white text-[18px] font-bold rounded-[4px] flex items-center justify-between px-5 transition-all border-none">
-          <span>BUY NOW</span>
-          <ChevronRight className="w-5 h-5" />
-        </Button>
+        <a href="https://app.backlinkcat.com/#/category" className="w-full">
+          <Button className="w-full h-[48px] bg-[#7FC142] hover:bg-[#6EBD44] text-white text-[18px] font-bold rounded-[4px] flex items-center justify-between px-5 transition-all border-none">
+            <span>BUY NOW</span>
+            <ChevronRight className="w-5 h-5" />
+          </Button>
+        </a>
       </div>
     </div>
   );
