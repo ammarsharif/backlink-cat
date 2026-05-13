@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { SidebarFilter } from '@/components/marketplace/SidebarFilter';
+import { MarketplaceFilters } from '@/components/marketplace/MarketplaceFilters';
 import { WebsiteList } from '@/components/marketplace/WebsiteList';
 import { WebsiteFilters } from '@/lib/websiteService';
 
@@ -84,16 +84,16 @@ export function CategoryPageClient({ slug }: CategoryPageClientProps) {
         </div>
       </div>
 
-      {/* Main Grid: Listings + Sidebar */}
-      <div className="flex flex-col-reverse lg:flex-row gap-0 pb-20 items-start overflow-visible">
-        {/* Left: Listing + Pagination */}
-        <div className="w-full lg:flex-1 overflow-visible">
-          <WebsiteList filters={filters} />
+      {/* Main Container: Top Filters + Full width Listing */}
+      <div className="flex flex-col gap-8 pb-20 items-stretch overflow-visible">
+        {/* Top: Filters */}
+        <div className="w-full relative z-20">
+          <MarketplaceFilters onFiltersChange={handleFiltersChange} />
         </div>
 
-        {/* Right: Filters */}
-        <div className="w-full lg:w-[391px] lg:pl-8 mb-12 lg:mb-0 shrink-0">
-          <SidebarFilter onFiltersChange={handleFiltersChange} />
+        {/* Full width Listing + Pagination */}
+        <div className="w-full overflow-visible">
+          <WebsiteList filters={filters} />
         </div>
       </div>
     </>
