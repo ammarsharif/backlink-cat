@@ -246,12 +246,12 @@ export function MarketplaceFilters({ onFiltersChange }: MarketplaceFiltersProps)
   const [liPrice, setLiPrice] = useState<(typeof FILTER_OPTIONS.price)[0] | null>(null);
   const [cbdPrice, setCbdPrice] = useState<(typeof FILTER_OPTIONS.price)[0] | null>(null);
 
-  const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
+  const [isAdvancedOpen, setIsAdvancedOpen] = useState(true);
   const [openCategories, setOpenCategories] = useState({
-    addition: false,
-    price: false,
-    traffic: false,
-    authority: false,
+    addition: true,
+    price: true,
+    traffic: true,
+    authority: true,
   });
 
   const activeFilterCount = [domainSearch, da, ss, dr, traffic, niche, linkType, gpPrice, liPrice, cbdPrice].filter(Boolean).length;
