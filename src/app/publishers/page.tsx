@@ -30,7 +30,7 @@ export default function PublishersPage() {
               commissions.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <a href="https://app.backlinkcat.com/#/signup">
+              <a href="https://app.backlinkcat.com/#/signup" target="_blank" rel="noopener noreferrer">
                 <Button size="lg" variant="primary">
                   REGISTER AS PUBLISHER
                 </Button>

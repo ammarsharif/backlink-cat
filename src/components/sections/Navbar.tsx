@@ -7,7 +7,6 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { useAuth } from "@/contexts/AuthContext";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -17,10 +16,11 @@ const NAV_LINKS = [
   { label: "Contact", href: "/contact" },
 ];
 
+const APP_URL = "https://app.backlinkcat.com";
+
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
-  const { user, logout } = useAuth();
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -29,8 +29,6 @@ export function Navbar() {
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
-
-
       {/* Main nav */}
       <Container size="wide">
         <div className="flex items-center justify-between h-16">
@@ -54,38 +52,23 @@ export function Navbar() {
                   )}
                 >
                   {item.label}
-                  {/* Active underline indicator */}
                   {isActive(item.href) && (
                     <span className="absolute bottom-[-4px] left-3 right-3 h-[2.5px] bg-[#6EBD44] rounded-full" />
                   )}
                 </Link>
               ))}
             </nav>
-            <div className="flex items-center gap-4">
-              {user ? (
-                <>
-                  <span className="text-[14px] text-gray-600 font-medium max-w-[150px] truncate">
-                    {user.isAnonymous ? "Guest" : user.email}
-                  </span>
-                  <button 
-                    onClick={logout}
-                    className="text-[15px] font-medium text-gray-500 hover:text-red-500 transition-colors cursor-pointer"
-                  >
-                    Logout
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Link href="/login" className="text-[15px] font-medium text-gray-500 hover:text-[#6EBD44] transition-colors">
-                    Login
-                  </Link>
-                  <a href="https://app.backlinkcat.com/#/signup">
-                    <button className="bg-[#6EBD44] text-white px-6 py-2 text-[14px] font-bold tracking-wide rounded-[4px] hover:bg-[#5da539] transition-colors cursor-pointer">
-                      SIGN UP
-                    </button>
-                  </a>
-                </>
-              )}
+            <div className="flex items-center gap-3">
+              <a href={`${APP_URL}/#/login`} target="_blank" rel="noopener noreferrer">
+                <button className="text-[15px] font-medium text-gray-500 hover:text-[#6EBD44] transition-colors cursor-pointer">
+                  Sign In
+                </button>
+              </a>
+              <a href={`${APP_URL}/#/signup`} target="_blank" rel="noopener noreferrer">
+                <button className="bg-[#6EBD44] text-white px-6 py-2 text-[14px] font-bold tracking-wide rounded-[4px] hover:bg-[#5da539] transition-colors cursor-pointer">
+                  SIGN UP
+                </button>
+              </a>
             </div>
           </div>
 
@@ -124,30 +107,17 @@ export function Navbar() {
                 {item.label}
               </Link>
             ))}
-            <div className="flex flex-col gap-2 pt-2 border-t border-[var(--color-border-subtle)]">
-              {user ? (
-                <>
-                  <div className="text-sm text-center text-gray-600 py-2">
-                    Logged in as: {user.isAnonymous ? "Guest" : user.email}
-                  </div>
-                  <Button variant="ghost" size="sm" className="w-full text-red-500 hover:text-red-600 hover:bg-red-50" onClick={logout}>
-                    Logout
-                  </Button>
-                </>
-              ) : (
-                <div className="flex gap-2">
-                  <Link href="/login" className="flex-1" onClick={() => setMobileOpen(false)}>
-                    <Button variant="ghost" size="sm" className="w-full">
-                      Login
-                    </Button>
-                  </Link>
-                  <a href="https://app.backlinkcat.com/#/signup" className="flex-1">
-                    <Button variant="primary" size="sm" className="w-full cursor-pointer">
-                      SIGN UP
-                    </Button>
-                  </a>
-                </div>
-              )}
+            <div className="flex gap-2 pt-2 border-t border-[var(--color-border-subtle)]">
+              <a href={`${APP_URL}/#/login`} target="_blank" rel="noopener noreferrer" className="flex-1">
+                <Button variant="ghost" size="sm" className="w-full cursor-pointer">
+                  Sign In
+                </Button>
+              </a>
+              <a href={`${APP_URL}/#/signup`} target="_blank" rel="noopener noreferrer" className="flex-1">
+                <Button variant="primary" size="sm" className="w-full cursor-pointer">
+                  SIGN UP
+                </Button>
+              </a>
             </div>
           </nav>
         </Container>

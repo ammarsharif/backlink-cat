@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 import { Navbar } from '@/components/sections/Navbar';
 import { Footer } from '@/components/sections/Footer';
 import { Container } from '@/components/ui/Container';
@@ -16,8 +17,9 @@ export default async function CategoryIndexPage() {
       <Navbar />
       <main className="bg-white min-h-screen pt-12">
         <Container size="wide" className="max-w-[1534px]">
-          {/* We default to 'all' for the base /category route */}
-          <CategoryPageClient slug="all" />
+          <Suspense fallback={null}>
+            <CategoryPageClient slug="all" />
+          </Suspense>
         </Container>
 
         <Guarantees />

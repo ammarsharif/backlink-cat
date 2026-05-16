@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 import { Navbar } from '@/components/sections/Navbar';
 import { Footer } from '@/components/sections/Footer';
 import { Container } from '@/components/ui/Container';
@@ -42,7 +43,9 @@ export default async function CategoryPage({ params }: Props) {
       <Navbar />
       <main className="bg-white min-h-screen pt-12">
         <Container size="wide" className="max-w-[1534px]">
-          <CategoryPageClient slug={slug} />
+          <Suspense fallback={null}>
+            <CategoryPageClient slug={slug} />
+          </Suspense>
         </Container>
 
         <Guarantees />

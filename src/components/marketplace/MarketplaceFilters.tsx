@@ -6,34 +6,6 @@ import { WebsiteFilters } from '@/lib/websiteService';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const FILTER_OPTIONS = {
-  da: [
-    { label: 'DA 0–20', min: 0, max: 20 },
-    { label: 'DA 20–40', min: 20, max: 40 },
-    { label: 'DA 40–60', min: 40, max: 60 },
-    { label: 'DA 60–80', min: 60, max: 80 },
-    { label: 'DA 80+', min: 80, max: 100 },
-  ],
-  ss: [
-    { label: 'SS 0–1', min: 0, max: 1 },
-    { label: 'SS 1–5', min: 1, max: 5 },
-    { label: 'SS 5–10', min: 5, max: 10 },
-    { label: 'SS 10+', min: 10, max: 100 },
-  ],
-  dr: [
-    { label: 'DR 0–20', min: 0, max: 20 },
-    { label: 'DR 20–40', min: 20, max: 40 },
-    { label: 'DR 40–60', min: 40, max: 60 },
-    { label: 'DR 60–80', min: 60, max: 80 },
-    { label: 'DR 80+', min: 80, max: 100 },
-  ],
-  traffic: [
-    { label: '0–1K', min: 0, max: 1_000 },
-    { label: '1K–5K', min: 1_000, max: 5_000 },
-    { label: '5K–10K', min: 5_000, max: 10_000 },
-    { label: '10K–50K', min: 10_000, max: 50_000 },
-    { label: '50K–100K', min: 50_000, max: 100_000 },
-    { label: '100K+', min: 100_000, max: Infinity },
-  ],
   niche: [
     'Technology',
     'Fashion',
@@ -50,32 +22,18 @@ const FILTER_OPTIONS = {
     'Digital Marketing & Advertising',
     'Kitchen, Cooking And Recipes',
   ],
-  price: [
-    { label: '$0–$50', min: 0, max: 50 },
-    { label: '$50–$100', min: 50, max: 100 },
-    { label: '$100–$250', min: 100, max: 250 },
-    { label: '$250–$500', min: 250, max: 500 },
-    { label: '$500–$1K', min: 500, max: 1_000 },
-    { label: '$1K+', min: 1_000, max: Infinity },
-  ],
 };
 
 // ─── Generic range option ─────────────────────────────────────────────────────
-interface RangeOption {
-  label: string;
-  min: number;
-  max: number;
-}
-
-// ─── FilterSelect (Range) ─────────────────────────────────────────────────────
 interface FilterSelectProps {
   placeholder: string;
-  options: RangeOption[];
-  value: RangeOption | null;
-  onChange: (option: RangeOption | null) => void;
+  min: string;
+  max: string;
+  onMinChange: (val: string) => void;
+  onMaxChange: (val: string) => void;
 }
 
-function FilterSelect({ placeholder, options, value, onChange }: FilterSelectProps) {
+function FilterSelect({ placeholder, min, max, onMinChange, onMaxChange }: FilterSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -89,9 +47,13 @@ function FilterSelect({ placeholder, options, value, onChange }: FilterSelectPro
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleSelect = (opt: RangeOption) => {
-    onChange(value?.label === opt.label ? null : opt);
-    setIsOpen(false);
+  const hasValue = min || max;
+
+  const getDisplayText = () => {
+    if (!min && !max) return placeholder;
+    if (min && max) return `${min}-${max}`;
+    if (min) return `${min}+`;
+    return `< ${max}`;
   };
 
   return (
@@ -103,15 +65,16 @@ function FilterSelect({ placeholder, options, value, onChange }: FilterSelectPro
             isOpen ? 'border-[#7FC142] ring-1 ring-[#7FC142]/10' : 'border-[#CCCCCC] hover:border-[#7FC142]'
           }`}
         >
-          <span className={`text-[14px] truncate ${value ? 'text-black font-medium' : 'text-[#A0A0A0]'}`}>
-            {value?.label ?? placeholder}
+          <span className={`text-[14px] truncate ${hasValue ? 'text-black font-semibold' : 'text-[#A0A0A0]'}`}>
+            {getDisplayText()}
           </span>
           <div className="flex items-center gap-1 shrink-0">
-            {value && (
+            {hasValue && (
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  onChange(null);
+                  onMinChange('');
+                  onMaxChange('');
                 }}
                 className="p-0.5 hover:text-red-500 transition-colors cursor-pointer"
               >
@@ -127,21 +90,36 @@ function FilterSelect({ placeholder, options, value, onChange }: FilterSelectPro
         </div>
 
         {isOpen && (
-          <div className="absolute top-[calc(100%+4px)] left-0 w-full bg-white border border-[#E0E0E0] shadow-xl z-50 rounded-[4px] py-1">
-            <div className="max-h-[200px] overflow-y-auto no-scrollbar">
-              {options.map((opt) => (
-                <div
-                  key={opt.label}
-                  onClick={() => handleSelect(opt)}
-                  className={`px-4 py-2.5 text-[14px] cursor-pointer transition-colors ${
-                    value?.label === opt.label
-                      ? 'bg-[#E8F5E9] text-[#7FC142] font-bold'
-                      : 'text-[#444444] hover:bg-[#F9F9F9]'
-                  }`}
-                >
-                  {opt.label}
+          <div className="absolute top-[calc(100%+4px)] left-0 w-full bg-white border border-[#E0E0E0] shadow-xl z-50 rounded-[4px] p-4">
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center gap-2">
+                <div className="flex-1">
+                  <label className="text-[10px] font-bold text-gray-400 block mb-1 uppercase">Min</label>
+                  <input
+                    type="number"
+                    value={min}
+                    onChange={(e) => onMinChange(e.target.value)}
+                    placeholder="0"
+                    className="w-full h-9 px-3 border border-gray-200 rounded text-[13px] focus:outline-none focus:border-[#7FC142]"
+                  />
                 </div>
-              ))}
+                <div className="flex-1">
+                  <label className="text-[10px] font-bold text-gray-400 block mb-1 uppercase">Max</label>
+                  <input
+                    type="number"
+                    value={max}
+                    onChange={(e) => onMaxChange(e.target.value)}
+                    placeholder="Any"
+                    className="w-full h-9 px-3 border border-gray-200 rounded text-[13px] focus:outline-none focus:border-[#7FC142]"
+                  />
+                </div>
+              </div>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="w-full h-9 bg-[#7FC142] text-white rounded text-[13px] font-bold hover:bg-[#6EBD44] transition-colors"
+              >
+                Apply
+              </button>
             </div>
           </div>
         )}
@@ -232,19 +210,35 @@ function NicheSelect({ value, onChange }: NicheSelectProps) {
 // ─── Main MarketplaceFilters ───────────────────────────────────────────────────────
 interface MarketplaceFiltersProps {
   onFiltersChange: (filters: WebsiteFilters) => void;
+  initialFilters?: WebsiteFilters;
 }
 
-export function MarketplaceFilters({ onFiltersChange }: MarketplaceFiltersProps) {
-  const [domainSearch, setDomainSearch] = useState('');
-  const [da, setDa] = useState<(typeof FILTER_OPTIONS.da)[0] | null>(null);
-  const [ss, setSs] = useState<(typeof FILTER_OPTIONS.ss)[0] | null>(null);
-  const [dr, setDr] = useState<(typeof FILTER_OPTIONS.dr)[0] | null>(null);
-  const [traffic, setTraffic] = useState<(typeof FILTER_OPTIONS.traffic)[0] | null>(null);
-  const [niche, setNiche] = useState<string | null>(null);
-  const [linkType, setLinkType] = useState<'DO_FOLLOW' | 'NO_FOLLOW' | null>(null);
-  const [gpPrice, setGpPrice] = useState<(typeof FILTER_OPTIONS.price)[0] | null>(null);
-  const [liPrice, setLiPrice] = useState<(typeof FILTER_OPTIONS.price)[0] | null>(null);
-  const [cbdPrice, setCbdPrice] = useState<(typeof FILTER_OPTIONS.price)[0] | null>(null);
+export function MarketplaceFilters({ onFiltersChange, initialFilters }: MarketplaceFiltersProps) {
+  const [domainSearch, setDomainSearch] = useState(initialFilters?.domainSearch ?? '');
+  const [daMin, setDaMin] = useState(initialFilters?.da?.min?.toString() ?? '');
+  const [daMax, setDaMax] = useState(initialFilters?.da?.max === Infinity ? '' : initialFilters?.da?.max?.toString() ?? '');
+  
+  const [ssMin, setSsMin] = useState(initialFilters?.ss?.min?.toString() ?? '');
+  const [ssMax, setSsMax] = useState(initialFilters?.ss?.max === Infinity ? '' : initialFilters?.ss?.max?.toString() ?? '');
+  
+  const [drMin, setDrMin] = useState(initialFilters?.dr?.min?.toString() ?? '');
+  const [drMax, setDrMax] = useState(initialFilters?.dr?.max === Infinity ? '' : initialFilters?.dr?.max?.toString() ?? '');
+  
+  const [trafficMin, setTrafficMin] = useState(initialFilters?.traffic?.min?.toString() ?? '');
+  const [trafficMax, setTrafficMax] = useState(initialFilters?.traffic?.max === Infinity ? '' : initialFilters?.traffic?.max?.toString() ?? '');
+  
+  const [gpPriceMin, setGpPriceMin] = useState(initialFilters?.gpPrice?.min?.toString() ?? '');
+  const [gpPriceMax, setGpPriceMax] = useState(initialFilters?.gpPrice?.max === Infinity ? '' : initialFilters?.gpPrice?.max?.toString() ?? '');
+  
+  const [liPriceMin, setLiPriceMin] = useState(initialFilters?.liPrice?.min?.toString() ?? '');
+  const [liPriceMax, setLiPriceMax] = useState(initialFilters?.liPrice?.max === Infinity ? '' : initialFilters?.liPrice?.max?.toString() ?? '');
+  
+  const [cbdPriceMin, setCbdPriceMin] = useState(initialFilters?.cbdPrice?.min?.toString() ?? '');
+  const [cbdPriceMax, setCbdPriceMax] = useState(initialFilters?.cbdPrice?.max === Infinity ? '' : initialFilters?.cbdPrice?.max?.toString() ?? '');
+
+  const [niche, setNiche] = useState<string | null>(initialFilters?.niche ?? null);
+  const [linkType, setLinkType] = useState<'DO_FOLLOW' | 'NO_FOLLOW' | null>(initialFilters?.linkType ?? null);
+
 
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(true);
   const [openCategories, setOpenCategories] = useState({
@@ -254,22 +248,36 @@ export function MarketplaceFilters({ onFiltersChange }: MarketplaceFiltersProps)
     authority: true,
   });
 
-  const activeFilterCount = [domainSearch, da, ss, dr, traffic, niche, linkType, gpPrice, liPrice, cbdPrice].filter(Boolean).length;
+  const activeFilterCount = [
+    domainSearch, 
+    (daMin || daMax), 
+    (ssMin || ssMax), 
+    (drMin || drMax), 
+    (trafficMin || trafficMax), 
+    niche, 
+    linkType, 
+    (gpPriceMin || gpPriceMax), 
+    (liPriceMin || liPriceMax), 
+    (cbdPriceMin || cbdPriceMax)
+  ].filter(Boolean).length;
+
+
 
   const buildFilters = useCallback((): WebsiteFilters => {
     return {
       domainSearch: domainSearch.trim() || undefined,
-      da: da ? { min: da.min, max: da.max } : null,
-      ss: ss ? { min: ss.min, max: ss.max } : null,
-      dr: dr ? { min: dr.min, max: dr.max } : null,
-      traffic: traffic ? { min: traffic.min, max: traffic.max } : null,
+      da: daMin || daMax ? { min: Number(daMin) || 0, max: daMax ? Number(daMax) : Infinity } : null,
+      ss: ssMin || ssMax ? { min: Number(ssMin) || 0, max: ssMax ? Number(ssMax) : Infinity } : null,
+      dr: drMin || drMax ? { min: Number(drMin) || 0, max: drMax ? Number(drMax) : Infinity } : null,
+      traffic: trafficMin || trafficMax ? { min: Number(trafficMin) || 0, max: trafficMax ? Number(trafficMax) : Infinity } : null,
       niche: niche ?? null,
       linkType: linkType ?? null,
-      gpPrice: gpPrice ? { min: gpPrice.min, max: gpPrice.max } : null,
-      liPrice: liPrice ? { min: liPrice.min, max: liPrice.max } : null,
-      cbdPrice: cbdPrice ? { min: cbdPrice.min, max: cbdPrice.max } : null,
+      gpPrice: gpPriceMin || gpPriceMax ? { min: Number(gpPriceMin) || 0, max: gpPriceMax ? Number(gpPriceMax) : Infinity } : null,
+      liPrice: liPriceMin || liPriceMax ? { min: Number(liPriceMin) || 0, max: liPriceMax ? Number(liPriceMax) : Infinity } : null,
+      cbdPrice: cbdPriceMin || cbdPriceMax ? { min: Number(cbdPriceMin) || 0, max: cbdPriceMax ? Number(cbdPriceMax) : Infinity } : null,
     };
-  }, [domainSearch, da, ss, dr, traffic, niche, linkType, gpPrice, liPrice, cbdPrice]);
+  }, [domainSearch, daMin, daMax, ssMin, ssMax, drMin, drMax, trafficMin, trafficMax, niche, linkType, gpPriceMin, gpPriceMax, liPriceMin, liPriceMax, cbdPriceMin, cbdPriceMax]);
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -280,15 +288,15 @@ export function MarketplaceFilters({ onFiltersChange }: MarketplaceFiltersProps)
 
   const resetAll = () => {
     setDomainSearch('');
-    setDa(null);
-    setSs(null);
-    setDr(null);
-    setTraffic(null);
+    setDaMin(''); setDaMax('');
+    setSsMin(''); setSsMax('');
+    setDrMin(''); setDrMax('');
+    setTrafficMin(''); setTrafficMax('');
     setNiche(null);
     setLinkType(null);
-    setGpPrice(null);
-    setLiPrice(null);
-    setCbdPrice(null);
+    setGpPriceMin(''); setGpPriceMax('');
+    setLiPriceMin(''); setLiPriceMax('');
+    setCbdPriceMin(''); setCbdPriceMax('');
   };
 
   const toggleCategory = (cat: keyof typeof openCategories) => {
@@ -363,7 +371,8 @@ export function MarketplaceFilters({ onFiltersChange }: MarketplaceFiltersProps)
               {openCategories.addition && (
                 <div className="p-5 bg-white flex flex-col gap-4 rounded-b-[4px]">
                   <NicheSelect value={niche} onChange={setNiche} />
-                  <FilterSelect placeholder="Spam Score" options={FILTER_OPTIONS.ss} value={ss} onChange={setSs} />
+                  <FilterSelect placeholder="Spam Score" min={ssMin} max={ssMax} onMinChange={setSsMin} onMaxChange={setSsMax} />
+
                   
                   <div className="flex flex-col gap-3 mt-1">
                     <span className="text-[13px] font-semibold text-[#444444] uppercase tracking-wide">Link Type</span>
@@ -405,9 +414,9 @@ export function MarketplaceFilters({ onFiltersChange }: MarketplaceFiltersProps)
               </button>
               {openCategories.price && (
                 <div className="p-5 bg-white flex flex-col gap-4 rounded-b-[4px]">
-                  <FilterSelect placeholder="Guest Post Price" options={FILTER_OPTIONS.price} value={gpPrice} onChange={setGpPrice} />
-                  <FilterSelect placeholder="Link Insertion Price" options={FILTER_OPTIONS.price} value={liPrice} onChange={setLiPrice} />
-                  <FilterSelect placeholder="CBD/Crypto Price" options={FILTER_OPTIONS.price} value={cbdPrice} onChange={setCbdPrice} />
+                  <FilterSelect placeholder="Guest Post Price" min={gpPriceMin} max={gpPriceMax} onMinChange={setGpPriceMin} onMaxChange={setGpPriceMax} />
+                  <FilterSelect placeholder="Link Insertion Price" min={liPriceMin} max={liPriceMax} onMinChange={setLiPriceMin} onMaxChange={setLiPriceMax} />
+                  <FilterSelect placeholder="CBD/Crypto Price" min={cbdPriceMin} max={cbdPriceMax} onMinChange={setCbdPriceMin} onMaxChange={setCbdPriceMax} />
                 </div>
               )}
             </div>
@@ -423,7 +432,8 @@ export function MarketplaceFilters({ onFiltersChange }: MarketplaceFiltersProps)
               </button>
               {openCategories.traffic && (
                 <div className="p-5 bg-white flex flex-col gap-4 rounded-b-[4px]">
-                  <FilterSelect placeholder="Organic Traffic" options={FILTER_OPTIONS.traffic} value={traffic} onChange={setTraffic} />
+                  <FilterSelect placeholder="Organic Traffic" min={trafficMin} max={trafficMax} onMinChange={setTrafficMin} onMaxChange={setTrafficMax} />
+
                 </div>
               )}
             </div>
@@ -439,8 +449,8 @@ export function MarketplaceFilters({ onFiltersChange }: MarketplaceFiltersProps)
               </button>
               {openCategories.authority && (
                 <div className="p-5 bg-white flex flex-col gap-4 rounded-b-[4px]">
-                  <FilterSelect placeholder="Domain Authority" options={FILTER_OPTIONS.da} value={da} onChange={setDa} />
-                  <FilterSelect placeholder="Domain Rating" options={FILTER_OPTIONS.dr} value={dr} onChange={setDr} />
+                  <FilterSelect placeholder="Domain Authority" min={daMin} max={daMax} onMinChange={setDaMin} onMaxChange={setDaMax} />
+                  <FilterSelect placeholder="Domain Rating" min={drMin} max={drMax} onMinChange={setDrMin} onMaxChange={setDrMax} />
                 </div>
               )}
             </div>

@@ -125,20 +125,46 @@ export async function fetchWebsites(
     const hasMore = docs.length > pageSize;
     const pageDocs = hasMore ? docs.slice(0, pageSize) : docs;
 
-    const websites: FirestoreWebsite[] = pageDocs.map((doc) => ({
+    let websites: FirestoreWebsite[] = pageDocs.map((doc) => ({
       id: doc.id,
       ...(doc.data() as Omit<FirestoreWebsite, 'id'>),
     }));
 
-    // Client-side domain search (Firestore doesn't support substring queries)
-    const filtered = filters.domainSearch
-      ? websites.filter((w) =>
-          w.domain?.toLowerCase().includes(filters.domainSearch!.toLowerCase())
-        )
-      : websites;
+    if (filters.domainSearch) {
+      const q = filters.domainSearch.toLowerCase();
+      websites = websites.filter((w) => w.domain?.toLowerCase().includes(q));
+    }
+    if (filters.da) {
+      const { min, max } = filters.da;
+      websites = websites.filter((w) => w.moz_da >= min && (max === Infinity || w.moz_da <= max));
+    }
+    if (filters.dr) {
+      const { min, max } = filters.dr;
+      websites = websites.filter((w) => w.ahref_dr >= min && (max === Infinity || w.ahref_dr <= max));
+    }
+    if (filters.ss) {
+      const { min, max } = filters.ss;
+      websites = websites.filter((w) => w.moz_ss >= min && (max === Infinity || w.moz_ss <= max));
+    }
+    if (filters.traffic) {
+      const { min, max } = filters.traffic;
+      websites = websites.filter((w) => w.ahref_traffic >= min && (max === Infinity || w.ahref_traffic <= max));
+    }
+    if (filters.gpPrice) {
+      const { min, max } = filters.gpPrice;
+      websites = websites.filter((w) => w.gp_price >= min && (max === Infinity || w.gp_price <= max));
+    }
+    if (filters.liPrice) {
+      const { min, max } = filters.liPrice;
+      websites = websites.filter((w) => w.li_price >= min && (max === Infinity || w.li_price <= max));
+    }
+    if (filters.cbdPrice) {
+      const { min, max } = filters.cbdPrice;
+      websites = websites.filter((w) => w.cbd_or_crypto_price >= min && (max === Infinity || w.cbd_or_crypto_price <= max));
+    }
 
     return {
-      websites: filtered,
+      websites,
       lastDoc: pageDocs.length > 0 ? pageDocs[pageDocs.length - 1] : null,
       hasMore,
     };
@@ -153,11 +179,6 @@ export async function fetchWebsites(
     throw err;
   }
 }
-
-/**
- * Fetch the most recently updated approved websites (home page "Recently Added").
- * Throws `FirestoreIndexError` when the composite index hasn't been created yet.
- */
 export async function fetchRecentWebsites(count: number = 4): Promise<FirestoreWebsite[]> {
   try {
     const q = query(

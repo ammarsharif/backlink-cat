@@ -7,15 +7,11 @@ import { auth } from '@/lib/firebase';
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  loginAnonymously: () => Promise<void>;
-  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
   loading: true,
-  loginAnonymously: async () => {},
-  logout: async () => {},
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -26,34 +22,37 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser);
       if (currentUser) {
-         try {
-           const token = await currentUser.getIdToken();
-           localStorage.setItem('userToken', token);
-         } catch (e) {
-           console.error("Error getting token", e);
-         }
+        // User exists (anonymous or real) — store and unblock UI
+        setUser(currentUser);
+        try {
+          const token = await currentUser.getIdToken();
+          localStorage.setItem('userToken', token);
+        } catch {
+          // Non-critical — token caching failure doesn't block reads/writes
+        }
+        setLoading(false);
       } else {
-         localStorage.removeItem('userToken');
+        // No session — silently sign in anonymously so writes are allowed
+        try {
+          await signInAnonymously(auth);
+          // onAuthStateChanged will fire again with the new anonymous user
+        } catch {
+          // If anonymous auth fails (e.g. offline), still unblock the UI
+          setLoading(false);
+        }
       }
-      setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
-  const loginAnonymously = async () => {
-    await signInAnonymously(auth);
-  };
-
-  const logout = async () => {
-    await signOut(auth);
-  };
-
   return (
-    <AuthContext.Provider value={{ user, loading, loginAnonymously, logout }}>
+    <AuthContext.Provider value={{ user, loading }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+// Convenience export so components can call signOut directly if ever needed
+export { signOut };
