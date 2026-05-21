@@ -25,7 +25,6 @@ const DEFAULT_SETTINGS: WebsiteSettings = {
   usefulLinks: [
     { label: "Home", href: "/" },
     { label: "Category", href: "/category" },
-    { label: "Stories", href: "#" },
     { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
     { label: "Login", href: "/login" },
