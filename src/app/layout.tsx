@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import { Poppins, Inter } from 'next/font/google';
+import { Navbar } from '@/components/sections/Navbar';
+import { Footer } from '@/components/sections/Footer';
+import { AuthProvider } from '@/contexts/AuthContext';
 import './globals.css';
 
 const poppins = Poppins({
@@ -42,15 +45,16 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-
-import { AuthProvider } from '@/contexts/AuthContext';
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${poppins.variable} ${inter.variable}`} suppressHydrationWarning>
       <body className="antialiased" suppressHydrationWarning>
         <AuthProvider>
-          {children}
+          <div className="flex min-h-screen flex-col bg-white">
+            <Navbar />
+            <div className="flex-1">{children}</div>
+            <Footer />
+          </div>
         </AuthProvider>
       </body>
     </html>

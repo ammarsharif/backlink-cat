@@ -1,7 +1,5 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
-import { Navbar } from '@/components/sections/Navbar';
-import { Footer } from '@/components/sections/Footer';
 import { Container } from '@/components/ui/Container';
 import { Guarantees } from '@/components/sections/Guarantees';
 import { CategoryPageClient } from '@/components/marketplace/CategoryPageClient';
@@ -13,18 +11,14 @@ export const metadata: Metadata = {
 
 export default async function CategoryIndexPage() {
   return (
-    <>
-      <Navbar />
-      <main className="bg-white min-h-screen pt-12">
-        <Container size="wide" className="max-w-[1534px]">
-          <Suspense fallback={null}>
-            <CategoryPageClient slug="all" />
-          </Suspense>
-        </Container>
+    <main className="bg-white min-h-screen pt-12">
+      <Container size="wide" className="max-w-[1534px]">
+        <Suspense fallback={null}>
+          <CategoryPageClient slug="all" />
+        </Suspense>
+      </Container>
 
-        <Guarantees />
-      </main>
-      <Footer />
-    </>
+      <Guarantees />
+    </main>
   );
 }
