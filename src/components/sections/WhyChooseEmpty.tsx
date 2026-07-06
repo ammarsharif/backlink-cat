@@ -7,7 +7,7 @@ interface WhyChooseEmptyProps {
 export function WhyChooseEmpty({ title }: WhyChooseEmptyProps) {
   return (
     <section className="py-20 bg-white overflow-hidden">
-      <Container className="max-w-[1440px]">
+      <Container className="max-w-[1440px] min-[1920px]:max-w-[1700px]">
         <h2 className="text-[28px] md:text-[36px] lg:text-[42px] font-bold text-center mb-12 font-[family-name:var(--font-heading)] leading-tight">
           {title.includes('Publishers') ? (
             <>

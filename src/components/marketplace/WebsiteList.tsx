@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
-import { DocumentSnapshot } from 'firebase/firestore';
+import { useState, useEffect, useCallback } from 'react';
 import { WebsiteCard, WebsiteCardSkeleton } from '@/components/marketplace/WebsiteCard';
 import {
   fetchWebsites,
@@ -59,10 +58,11 @@ function EmptyState({ hasFilters }: { hasFilters: boolean }) {
 interface PaginationControlsProps {
   currentPage: number;
   totalPages: number;
+  totalCount: number;
   onPageChange: (page: number) => void;
 }
 
-function PaginationControls({ currentPage, totalPages, onPageChange }: PaginationControlsProps) {
+function PaginationControls({ currentPage, totalPages, totalCount, onPageChange }: PaginationControlsProps) {
   if (totalPages <= 1) return null;
 
   const getPageNumbers = () => {
@@ -129,7 +129,7 @@ function PaginationControls({ currentPage, totalPages, onPageChange }: Paginatio
       </div>
 
       <span className="text-[14px] text-[#888]">
-        Showing up to {PAGE_SIZE} listings
+        {totalCount} total listing{totalCount !== 1 ? 's' : ''}
       </span>
     </div>
   );
@@ -146,9 +146,7 @@ export function WebsiteList({ filters }: WebsiteListProps) {
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
-  // We cache page cursors so navigating back is instant
-  const pageCursors = useRef<Map<number, DocumentSnapshot | null>>(new Map([[1, null]]));
+  const [totalCount, setTotalCount] = useState(0);
 
   const hasFilters =
     !!filters.domainSearch ||
@@ -167,21 +165,11 @@ export function WebsiteList({ filters }: WebsiteListProps) {
       setLoading(true);
       setError(null);
       try {
-        const cursorForPage = pageCursors.current.get(page) ?? null;
-        const result = await fetchWebsites(filters, PAGE_SIZE, cursorForPage);
+        const result = await fetchWebsites(filters, page, PAGE_SIZE);
 
         setWebsites(result.websites);
-
-        if (result.lastDoc) {
-          pageCursors.current.set(page + 1, result.lastDoc);
-        }
-
-        if (result.hasMore) {
-          setTotalPages(Math.max(totalPages, page + 1));
-        } else {
-          setTotalPages(page);
-        }
-
+        setTotalPages(result.totalPages);
+        setTotalCount(result.totalCount);
         setCurrentPage(page);
       } catch (err) {
         // Log for dev debugging — users never see technical details
@@ -191,14 +179,11 @@ export function WebsiteList({ filters }: WebsiteListProps) {
         setLoading(false);
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [filters]
   );
 
   // Reset to page 1 whenever filters change
   useEffect(() => {
-    pageCursors.current = new Map([[1, null]]);
-    setTotalPages(1);
     loadPage(1);
   }, [filters, loadPage]);
 
@@ -214,9 +199,9 @@ export function WebsiteList({ filters }: WebsiteListProps) {
       {/* Result count badge */}
       {!loading && !error && (
         <p className="text-[13px] text-[#888] mb-4">
-          {websites.length === 0
+          {totalCount === 0
             ? 'No results'
-            : `Showing ${websites.length} listing${websites.length !== 1 ? 's' : ''}`}
+            : `Showing ${websites.length} of ${totalCount} listing${totalCount !== 1 ? 's' : ''}`}
           {hasFilters && ' — filtered'}
         </p>
       )}
@@ -237,6 +222,7 @@ export function WebsiteList({ filters }: WebsiteListProps) {
         <PaginationControls
           currentPage={currentPage}
           totalPages={totalPages}
+          totalCount={totalCount}
           onPageChange={handlePageChange}
         />
       )}

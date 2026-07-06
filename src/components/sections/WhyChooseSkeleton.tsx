@@ -34,7 +34,7 @@ function VideoSkeleton() {
 export function WhyChooseSkeleton({ videoPosition = 'right' }: WhyChooseSkeletonProps) {
   return (
     <section className="py-20 bg-white overflow-hidden">
-      <Container className="max-w-[1440px]">
+      <Container className="max-w-[1440px] min-[1920px]:max-w-[1700px]">
         {/* Title skeleton */}
         <div className="flex justify-center mb-12">
           <div className="h-9 md:h-10 lg:h-12 w-72 md:w-96 rounded-lg bg-gray-200 animate-pulse" />

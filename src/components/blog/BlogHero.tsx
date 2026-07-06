@@ -30,7 +30,7 @@ export function BlogHero() {
 
   return (
     <section className="pt-8 pb-0">
-      <Container size="wide" className="max-w-[1534px]">
+      <Container size="wide" className="max-w-[1534px] min-[1920px]:max-w-[1800px]">
         {/* Outer wrapper: relative + overflow-visible so arrows can protrude */}
         <div className="relative">
           {/* Slider image area - overflow hidden for rounded corners */}

@@ -21,7 +21,7 @@ export function Guarantees() {
 
   return (
     <div className="border-t border-b border-[#D9ECCF] bg-[#FCFFFB] py-8">
-      <Container size="wide" className="max-w-[1580px]">
+      <Container size="wide" className="max-w-[1580px] min-[1920px]:max-w-[1850px]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {items.map((item, idx) => (
             <div 

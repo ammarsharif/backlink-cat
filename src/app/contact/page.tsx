@@ -18,7 +18,7 @@ export default function ContactPage() {
       </div>
       
       {/* Content Container */}
-      <div className="relative z-10 w-full max-w-[1300px] mx-auto px-6 py-8 md:py-12 flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-10 lg:gap-16">
+      <div className="relative z-10 w-full max-w-[1300px] min-[1920px]:max-w-[1550px] mx-auto px-6 py-8 md:py-12 flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-10 lg:gap-16">
         
         {/* Left Side: Heading & Image */}
         <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left w-full lg:max-w-xl">

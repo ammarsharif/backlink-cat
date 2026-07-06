@@ -11,7 +11,7 @@ export async function WhyMarketers() {
 
   return (
     <section className="py-20 bg-white overflow-hidden">
-      <Container className="max-w-[1440px]">
+      <Container className="max-w-[1440px] min-[1920px]:max-w-[1700px]">
         <h2 className="text-[28px] md:text-[36px] lg:text-[42px] font-bold text-center mb-12 font-heading leading-tight">
           <span className="text-[#7FC142]">Why Marketers</span> Choose Us?
         </h2>

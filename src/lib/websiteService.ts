@@ -5,8 +5,6 @@ import {
   where,
   orderBy,
   limit,
-  startAfter,
-  DocumentSnapshot,
   QueryConstraint,
   Timestamp,
 } from 'firebase/firestore';
@@ -52,8 +50,8 @@ export interface WebsiteFilters {
 // ─── Paginated Result ────────────────────────────────────────────────────────
 export interface PaginatedWebsites {
   websites: FirestoreWebsite[];
-  lastDoc: DocumentSnapshot | null;
-  hasMore: boolean;
+  totalCount: number;
+  totalPages: number;
 }
 
 // ─── Typed Error ─────────────────────────────────────────────────────────────
@@ -88,48 +86,48 @@ function isIndexError(err: unknown): boolean {
 
 const WEBSITES_COLLECTION = 'websites';
 
+// Firestore fetch cap for the filterable pool. Niche/DA/DR/SS/traffic/price
+// filters all run in JS (below) rather than as Firestore `where` constraints —
+// combining them server-side would need several composite indexes. Pagination
+// is computed *after* filtering, over this whole pool, so page counts stay
+// accurate. Raise this cap (or move filters back to server-side queries with
+// the matching composite indexes) if the catalog grows past a few thousand
+// approved listings.
+const MAX_FILTERABLE_DOCS = 1000;
+
 /**
- * Fetch approved websites with optional filters and cursor-based pagination.
- * Throws `FirestoreIndexError` when the composite index hasn't been created yet.
+ * Fetch approved websites with optional filters, paginated over the fully
+ * filtered result set (not the raw Firestore page) so page counts are correct.
+ * Throws `FirestoreIndexError` when a composite index hasn't been created yet.
  */
 export async function fetchWebsites(
   filters: WebsiteFilters = {},
-  pageSize: number = 10,
-  lastDocument: DocumentSnapshot | null = null
+  page: number = 1,
+  pageSize: number = 10
 ): Promise<PaginatedWebsites> {
   const constraints: QueryConstraint[] = [
     where('status', '==', 'APPROVED'),
     orderBy('updated_time', 'desc'),
   ];
 
-  if (filters.niche) {
-    constraints.push(where('niches', 'array-contains', filters.niche));
-  }
-
   if (filters.linkType) {
     constraints.push(where('link_type', '==', filters.linkType));
   }
 
-  if (lastDocument) {
-    constraints.push(startAfter(lastDocument));
-  }
-
-  // Fetch one extra to detect whether more pages exist
-  constraints.push(limit(pageSize + 1));
+  constraints.push(limit(MAX_FILTERABLE_DOCS));
 
   try {
     const q = query(collection(db, WEBSITES_COLLECTION), ...constraints);
     const snapshot = await getDocs(q);
 
-    const docs = snapshot.docs;
-    const hasMore = docs.length > pageSize;
-    const pageDocs = hasMore ? docs.slice(0, pageSize) : docs;
-
-    let websites: FirestoreWebsite[] = pageDocs.map((doc) => ({
+    let websites: FirestoreWebsite[] = snapshot.docs.map((doc) => ({
       id: doc.id,
       ...(doc.data() as Omit<FirestoreWebsite, 'id'>),
     }));
 
+    if (filters.niche) {
+      websites = websites.filter((w) => w.niches?.includes(filters.niche as string));
+    }
     if (filters.domainSearch) {
       const q = filters.domainSearch.toLowerCase();
       websites = websites.filter((w) => w.domain?.toLowerCase().includes(q));
@@ -163,10 +161,15 @@ export async function fetchWebsites(
       websites = websites.filter((w) => w.cbd_or_crypto_price >= min && (max === Infinity || w.cbd_or_crypto_price <= max));
     }
 
+    const totalCount = websites.length;
+    const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
+    const safePage = Math.min(Math.max(page, 1), totalPages);
+    const startIdx = (safePage - 1) * pageSize;
+
     return {
-      websites,
-      lastDoc: pageDocs.length > 0 ? pageDocs[pageDocs.length - 1] : null,
-      hasMore,
+      websites: websites.slice(startIdx, startIdx + pageSize),
+      totalCount,
+      totalPages,
     };
   } catch (err) {
     if (isIndexError(err)) {

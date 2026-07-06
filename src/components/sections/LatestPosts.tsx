@@ -41,7 +41,7 @@ export function LatestPosts() {
 
   return (
     <section className="py-20 bg-white">
-      <Container className="max-w-[1534px]">
+      <Container className="max-w-[1534px] min-[1920px]:max-w-[1800px]">
         <h2 className="text-[28px] md:text-[36px] lg:text-[42px] font-bold text-center mb-16 font-[var(--font-heading)]">
           Latest <span className="text-[#6EBD44]">Posts</span>
         </h2>

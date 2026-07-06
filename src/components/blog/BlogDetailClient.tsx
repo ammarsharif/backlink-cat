@@ -13,7 +13,7 @@ function DetailSkeleton() {
   return (
     <div className="animate-pulse">
       <div className="bg-[#F9F9F9] py-16 border-b border-[#EEEEEE]">
-        <Container size="wide" className="max-w-[1534px]">
+        <Container size="wide" className="max-w-[1534px] min-[1920px]:max-w-[1800px]">
           <div className="max-w-[1000px] space-y-4">
             <div className="h-4 bg-gray-200 rounded w-32" />
             <div className="h-10 bg-gray-200 rounded w-3/4" />
@@ -26,7 +26,7 @@ function DetailSkeleton() {
           </div>
         </Container>
       </div>
-      <Container size="wide" className="max-w-[1534px] py-16">
+      <Container size="wide" className="max-w-[1534px] min-[1920px]:max-w-[1800px] py-16">
         <div className="flex flex-col lg:flex-row gap-12">
           <div className="flex-1 space-y-6">
             <div className="rounded-[30px] bg-gray-200 aspect-video w-full" />
@@ -121,7 +121,7 @@ export function BlogDetailClient({ slug }: BlogDetailClientProps) {
     <>
       {/* ── Blog Post Header ───────────────────────────────────────── */}
       <div className="bg-[#F9F9F9] py-16 border-b border-[#EEEEEE]">
-        <Container size="wide" className="max-w-[1534px]">
+        <Container size="wide" className="max-w-[1534px] min-[1920px]:max-w-[1800px]">
           <div className="max-w-[1000px]">
             {/* Breadcrumb */}
             <div className="flex items-center gap-2 text-[14px] text-[#6EBD44] font-bold mb-6 font-[var(--font-inter)]">
@@ -183,7 +183,7 @@ export function BlogDetailClient({ slug }: BlogDetailClientProps) {
       </div>
 
       {/* ── Content + Sidebar ─────────────────────────────────────── */}
-      <Container size="wide" className="max-w-[1534px]">
+      <Container size="wide" className="max-w-[1534px] min-[1920px]:max-w-[1800px]">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 py-16">
           {/* Main Content */}
           <div className="flex-1 min-w-0">

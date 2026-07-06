@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { ChevronDown, X, SlidersHorizontal, Search } from 'lucide-react';
 import { WebsiteFilters } from '@/lib/websiteService';
 
@@ -12,6 +13,7 @@ const FILTER_OPTIONS = {
     'Health & Fitness',
     'Business',
     'Education',
+    'Insurance',
     'Travel & Tourism',
     'Food & Drink',
     'Lifestyle',
@@ -23,6 +25,19 @@ const FILTER_OPTIONS = {
     'Kitchen, Cooking And Recipes',
   ],
 };
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+function formatRangeLabel(min: string, max: string, prefix = ''): string {
+  if (min && max) return `${prefix}${min}–${prefix}${max}`;
+  if (min) return `${prefix}${min}+`;
+  return `< ${prefix}${max}`;
+}
+
+interface FilterChip {
+  key: string;
+  label: string;
+  onClear: () => void;
+}
 
 // ─── Generic range option ─────────────────────────────────────────────────────
 interface FilterSelectProps {
@@ -214,6 +229,8 @@ interface MarketplaceFiltersProps {
 }
 
 export function MarketplaceFilters({ onFiltersChange, initialFilters }: MarketplaceFiltersProps) {
+  const pathname = usePathname();
+  const router = useRouter();
   const [domainSearch, setDomainSearch] = useState(initialFilters?.domainSearch ?? '');
   const [daMin, setDaMin] = useState(initialFilters?.da?.min?.toString() ?? '');
   const [daMax, setDaMax] = useState(initialFilters?.da?.max === Infinity ? '' : initialFilters?.da?.max?.toString() ?? '');
@@ -249,19 +266,53 @@ export function MarketplaceFilters({ onFiltersChange, initialFilters }: Marketpl
   });
 
   const activeFilterCount = [
-    domainSearch, 
-    (daMin || daMax), 
-    (ssMin || ssMax), 
-    (drMin || drMax), 
-    (trafficMin || trafficMax), 
-    niche, 
-    linkType, 
-    (gpPriceMin || gpPriceMax), 
-    (liPriceMin || liPriceMax), 
+    domainSearch,
+    (daMin || daMax),
+    (ssMin || ssMax),
+    (drMin || drMax),
+    (trafficMin || trafficMax),
+    niche,
+    linkType,
+    (gpPriceMin || gpPriceMax),
+    (liPriceMin || liPriceMax),
     (cbdPriceMin || cbdPriceMax)
   ].filter(Boolean).length;
 
-
+  const filterChips: FilterChip[] = [];
+  if (domainSearch) {
+    filterChips.push({ key: 'domain', label: `Domain: "${domainSearch}"`, onClear: () => setDomainSearch('') });
+  }
+  if (niche) {
+    filterChips.push({ key: 'niche', label: `Niche: ${niche}`, onClear: () => setNiche(null) });
+  }
+  if (linkType) {
+    filterChips.push({
+      key: 'linkType',
+      label: linkType === 'DO_FOLLOW' ? 'Do Follow' : 'No Follow',
+      onClear: () => setLinkType(null),
+    });
+  }
+  if (daMin || daMax) {
+    filterChips.push({ key: 'da', label: `DA: ${formatRangeLabel(daMin, daMax)}`, onClear: () => { setDaMin(''); setDaMax(''); } });
+  }
+  if (drMin || drMax) {
+    filterChips.push({ key: 'dr', label: `DR: ${formatRangeLabel(drMin, drMax)}`, onClear: () => { setDrMin(''); setDrMax(''); } });
+  }
+  if (ssMin || ssMax) {
+    filterChips.push({ key: 'ss', label: `Spam Score: ${formatRangeLabel(ssMin, ssMax)}`, onClear: () => { setSsMin(''); setSsMax(''); } });
+  }
+  if (trafficMin || trafficMax) {
+    filterChips.push({ key: 'traffic', label: `Traffic: ${formatRangeLabel(trafficMin, trafficMax)}`, onClear: () => { setTrafficMin(''); setTrafficMax(''); } });
+  }
+  if (gpPriceMin || gpPriceMax) {
+    filterChips.push({ key: 'gp', label: `GP Price: ${formatRangeLabel(gpPriceMin, gpPriceMax, '$')}`, onClear: () => { setGpPriceMin(''); setGpPriceMax(''); } });
+  }
+  if (liPriceMin || liPriceMax) {
+    filterChips.push({ key: 'li', label: `LI Price: ${formatRangeLabel(liPriceMin, liPriceMax, '$')}`, onClear: () => { setLiPriceMin(''); setLiPriceMax(''); } });
+  }
+  if (cbdPriceMin || cbdPriceMax) {
+    filterChips.push({ key: 'cbd', label: `CBD/Crypto: ${formatRangeLabel(cbdPriceMin, cbdPriceMax, '$')}`, onClear: () => { setCbdPriceMin(''); setCbdPriceMax(''); } });
+  }
 
   const buildFilters = useCallback((): WebsiteFilters => {
     return {
@@ -282,9 +333,36 @@ export function MarketplaceFilters({ onFiltersChange, initialFilters }: Marketpl
   useEffect(() => {
     const timer = setTimeout(() => {
       onFiltersChange(buildFilters());
+
+      const params = new URLSearchParams();
+      if (domainSearch.trim()) params.set('domain', domainSearch.trim());
+      if (niche) params.set('niche', niche);
+      if (daMin) params.set('da_min', daMin);
+      if (daMax) params.set('da_max', daMax);
+      if (drMin) params.set('dr_min', drMin);
+      if (drMax) params.set('dr_max', drMax);
+      if (ssMin) params.set('ss_min', ssMin);
+      if (ssMax) params.set('ss_max', ssMax);
+      if (trafficMin) params.set('traffic_min', trafficMin);
+      if (trafficMax) params.set('traffic_max', trafficMax);
+      if (gpPriceMin) params.set('price_min', gpPriceMin);
+      if (gpPriceMax) params.set('price_max', gpPriceMax);
+      if (liPriceMin) params.set('li_price_min', liPriceMin);
+      if (liPriceMax) params.set('li_price_max', liPriceMax);
+      if (cbdPriceMin) params.set('cbd_price_min', cbdPriceMin);
+      if (cbdPriceMax) params.set('cbd_price_max', cbdPriceMax);
+      if (linkType) params.set('link_type', linkType);
+
+      const qs = params.toString();
+      router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
     }, 400);
     return () => clearTimeout(timer);
-  }, [buildFilters, onFiltersChange]);
+  }, [
+    buildFilters, onFiltersChange, pathname, router,
+    domainSearch, niche, daMin, daMax, drMin, drMax, ssMin, ssMax,
+    trafficMin, trafficMax, gpPriceMin, gpPriceMax,
+    liPriceMin, liPriceMax, cbdPriceMin, cbdPriceMax, linkType,
+  ]);
 
   const resetAll = () => {
     setDomainSearch('');
@@ -339,19 +417,38 @@ export function MarketplaceFilters({ onFiltersChange, initialFilters }: Marketpl
           </button>
         </div>
 
-        {/* Filters Count and Reset */}
+        {/* Active Filter Chips */}
         {activeFilterCount > 0 && (
-          <div className="flex items-center justify-between mt-4">
-            <span className="text-[14px] font-semibold text-[#7FC142]">
-              {activeFilterCount} active filter{activeFilterCount !== 1 ? 's' : ''}
-            </span>
-            <button
-              onClick={resetAll}
-              className="text-[13px] text-[#888] hover:text-red-500 flex items-center gap-1 transition-colors cursor-pointer font-medium"
-            >
-              <X className="w-4 h-4" />
-              Reset all
-            </button>
+          <div className="flex flex-col gap-3 mt-4">
+            <div className="flex items-center justify-between">
+              <span className="text-[14px] font-semibold text-[#7FC142]">
+                {activeFilterCount} active filter{activeFilterCount !== 1 ? 's' : ''}
+              </span>
+              <button
+                onClick={resetAll}
+                className="text-[13px] text-[#888] hover:text-red-500 flex items-center gap-1 transition-colors cursor-pointer font-medium"
+              >
+                <X className="w-4 h-4" />
+                Reset all
+              </button>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {filterChips.map((chip) => (
+                <span
+                  key={chip.key}
+                  className="inline-flex items-center gap-1.5 bg-[#F0F7E8] text-[#4a8f27] text-[13px] font-semibold pl-3 pr-2 py-1.5 rounded-full border border-[#7FC142]/30"
+                >
+                  {chip.label}
+                  <button
+                    onClick={chip.onClear}
+                    aria-label={`Clear ${chip.label} filter`}
+                    className="p-0.5 rounded-full hover:bg-red-100 hover:text-red-500 transition-colors cursor-pointer"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                </span>
+              ))}
+            </div>
           </div>
         )}
 

@@ -1,20 +1,24 @@
 'use client';
 
 import { useState, useCallback, useRef } from 'react';
+import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { MarketplaceFilters } from '@/components/marketplace/MarketplaceFilters';
 import { WebsiteList } from '@/components/marketplace/WebsiteList';
 import { WebsiteFilters } from '@/lib/websiteService';
 
 const RELATED_CATEGORIES = [
-  { name: 'Education', href: '/category/education' },
-  { name: 'Insurance', href: '/category/insurance' },
-  { name: 'Business', href: '/category/business' },
-  { name: 'Lifestyle', href: '/category/lifestyle' },
+  { name: 'Education', href: '/category/education', niche: 'Education' },
+  { name: 'Insurance', href: '/category/insurance', niche: 'Insurance' },
+  { name: 'Business', href: '/category/business', niche: 'Business' },
+  { name: 'Lifestyle', href: '/category/lifestyle', niche: 'Lifestyle' },
 ];
 
 function parseInitialFilters(searchParams: ReturnType<typeof useSearchParams>): WebsiteFilters {
   const filters: WebsiteFilters = {};
+
+  const niche = searchParams.get('niche');
+  if (niche) filters.niche = niche;
 
   const domain = searchParams.get('domain');
   if (domain) filters.domainSearch = domain;
@@ -37,10 +41,33 @@ function parseInitialFilters(searchParams: ReturnType<typeof useSearchParams>): 
     filters.traffic = { min: Number(trafficMin), max: trafficMax !== null ? Number(trafficMax) : Infinity };
   }
 
+  const ssMin = searchParams.get('ss_min');
+  const ssMax = searchParams.get('ss_max');
+  if (ssMin !== null) {
+    filters.ss = { min: Number(ssMin), max: ssMax !== null ? Number(ssMax) : Infinity };
+  }
+
   const priceMin = searchParams.get('price_min');
   const priceMax = searchParams.get('price_max');
   if (priceMin !== null) {
     filters.gpPrice = { min: Number(priceMin), max: priceMax !== null ? Number(priceMax) : Infinity };
+  }
+
+  const liPriceMin = searchParams.get('li_price_min');
+  const liPriceMax = searchParams.get('li_price_max');
+  if (liPriceMin !== null) {
+    filters.liPrice = { min: Number(liPriceMin), max: liPriceMax !== null ? Number(liPriceMax) : Infinity };
+  }
+
+  const cbdPriceMin = searchParams.get('cbd_price_min');
+  const cbdPriceMax = searchParams.get('cbd_price_max');
+  if (cbdPriceMin !== null) {
+    filters.cbdPrice = { min: Number(cbdPriceMin), max: cbdPriceMax !== null ? Number(cbdPriceMax) : Infinity };
+  }
+
+  const linkType = searchParams.get('link_type');
+  if (linkType === 'DO_FOLLOW' || linkType === 'NO_FOLLOW') {
+    filters.linkType = linkType;
   }
 
   return filters;
@@ -52,6 +79,7 @@ interface CategoryPageClientProps {
 
 export function CategoryPageClient({ slug }: CategoryPageClientProps) {
   const searchParams = useSearchParams();
+  const safeSlug = slug && slug !== 'undefined' ? slug : 'all';
   const initialFilters = useRef(parseInitialFilters(searchParams)).current;
   const [filters, setFilters] = useState<WebsiteFilters>(initialFilters);
 
@@ -59,7 +87,6 @@ export function CategoryPageClient({ slug }: CategoryPageClientProps) {
     setFilters(newFilters);
   }, []);
 
-  const safeSlug = slug && slug !== 'undefined' ? slug : 'all';
   const categoryName =
     safeSlug === 'all'
       ? 'Marketplace'
@@ -105,18 +132,23 @@ export function CategoryPageClient({ slug }: CategoryPageClientProps) {
           <span className="text-[#7FC142]">Related</span> Categories
         </h2>
         <div className="flex flex-col gap-4">
-          {RELATED_CATEGORIES.map((cat) => (
-            <a
-              key={cat.name}
-              href={cat.href}
-              className="flex items-center gap-3 group transition-all"
-            >
-              <span className="text-[#7FC142] text-[24px] font-bold">{'>'}</span>
-              <span className="text-[24px] font-medium text-[#7FC142] underline decoration-1 underline-offset-4 group-hover:text-[#6EBD44] transition-colors">
-                {cat.name}
-              </span>
-            </a>
-          ))}
+          {RELATED_CATEGORIES.map((cat) => {
+            const params = new URLSearchParams(searchParams.toString());
+            params.set('niche', cat.niche);
+            const href = `${cat.href}?${params.toString()}`;
+            return (
+              <Link
+                key={cat.name}
+                href={href}
+                className="flex items-center gap-3 group transition-all"
+              >
+                <span className="text-[#7FC142] text-[24px] font-bold">{'>'}</span>
+                <span className="text-[24px] font-medium text-[#7FC142] underline decoration-1 underline-offset-4 group-hover:text-[#6EBD44] transition-colors">
+                  {cat.name}
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </div>
 

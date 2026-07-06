@@ -7,7 +7,7 @@ export async function Footer() {
 
   return (
     <footer className="bg-[#6EBD44] text-white pt-16 pb-8">
-      <Container className="max-w-[1440px]">
+      <Container className="max-w-[1440px] min-[1920px]:max-w-[1700px]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           {/* About US */}
           <div>
