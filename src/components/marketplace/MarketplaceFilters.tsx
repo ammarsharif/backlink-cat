@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { ChevronDown, X, SlidersHorizontal, Search } from 'lucide-react';
 import { WebsiteFilters } from '@/lib/websiteService';
 
@@ -231,6 +231,7 @@ interface MarketplaceFiltersProps {
 export function MarketplaceFilters({ onFiltersChange, initialFilters }: MarketplaceFiltersProps) {
   const pathname = usePathname();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [domainSearch, setDomainSearch] = useState(initialFilters?.domainSearch ?? '');
   const [daMin, setDaMin] = useState(initialFilters?.da?.min?.toString() ?? '');
   const [daMax, setDaMax] = useState(initialFilters?.da?.max === Infinity ? '' : initialFilters?.da?.max?.toString() ?? '');
@@ -354,11 +355,13 @@ export function MarketplaceFilters({ onFiltersChange, initialFilters }: Marketpl
       if (linkType) params.set('link_type', linkType);
 
       const qs = params.toString();
-      router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+      if (qs !== searchParams.toString()) {
+        router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+      }
     }, 400);
     return () => clearTimeout(timer);
   }, [
-    buildFilters, onFiltersChange, pathname, router,
+    buildFilters, onFiltersChange, pathname, router, searchParams,
     domainSearch, niche, daMin, daMax, drMin, drMax, ssMin, ssMax,
     trafficMin, trafficMax, gpPriceMin, gpPriceMax,
     liPriceMin, liPriceMax, cbdPriceMin, cbdPriceMax, linkType,
